@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body{
+	margin:0;
+	color:rgb(100, 16, 16);
+
+	font:600 16px/18px 'Open Sans',sans-serif;
+
+
+	background-image: url(./assets/images/mmmm.jpg);
+
+    background-repeat: no-repeat; 
+    background-position: center;
+
+	background-blend-mode:luminosity;
+	
+	-moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height:100%;
+    width:100%; 
+}
+
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

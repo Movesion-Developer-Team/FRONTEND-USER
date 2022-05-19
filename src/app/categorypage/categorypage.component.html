@@ -1,0 +1,58 @@
+
+
+<div class=invitation *ngIf="notassigned">
+
+
+
+<form  [formGroup]="invitationForm"  (ngSubmit)="submit()">
+  
+     
+      <div class="form-group ">
+        <label > <h1>register here</h1></label>
+        <input type="string"  class="form-control" formControlName="invitation" class="form-control" placeholder="invitation" >
+          </div>
+<button class="btn btn-warning " type="submit">send</button>
+</form>
+
+
+
+</div>
+
+
+
+
+
+<div *ngIf="assigned">
+
+<div class="container">
+  <div class="flex">
+    <div class="icon">
+      <a href="/home" class="btn btn-danger btn-block" > <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
+    </div>
+    <form class="example-form" id="example1">
+        <mat-form-field class="example-full-width-centered">
+        <span matPrefix> </span>
+        <input id="search" type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "term">
+        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+        </mat-form-field>
+        <br/>
+       
+        </form>
+       
+        
+      </div>
+
+    <div *ngFor="let item of listinfo" class="example">
+      <a [routerLink]="['/players',item.id]" class="box" >  
+        {{item.name}}
+
+        
+       </a>
+      
+  
+      <!-- <button class="box" (click)="gotoplayer(item)"> a</button> -->
+  </div>
+
+</div>
+
+</div>
