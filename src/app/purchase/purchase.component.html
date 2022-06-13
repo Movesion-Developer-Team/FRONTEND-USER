@@ -1,0 +1,321 @@
+<!-- <div class="container">
+
+
+    <mat-horizontal-stepper class="mat-card">
+
+
+        <mat-step >
+            <ng-template matStepLabel="matStepLabel">INFO</ng-template>
+
+
+            <mat-card >
+
+                <h1>Condizioni di utilizzo</h1>
+                <h3>
+                     consectetur adipisicing elit. Ea, libero aperiam consequuntur vitae impedit quam maiores, laudantium atque mollitia ab praesentium deserunt sit modi animi fugiat dolor debitis quia quas.
+                      
+                    <br>
+                       
+                               
+                                <h1>This is title</h1>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio obcaecati itaque voluptates quaerat et eligendi asperiores recusandae impedit maxime sunt, sit dolor laudantium sequi deserunt voluptatem ipsa harum quas libero?
+                                <br>
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis, quae, beatae, nemo enim velit sequi laborum nesciunt fuga quis ipsum ad blanditiis harum eum animi debitis assumenda dicta distinctio eius!
+                                    <h1>This is title</h1>
+                                   
+                                    
+                                        Lorem, ipsum dolor sit amet comsdakjkahdajd askdj askdjaskdj b aksjdaskdhaskd
+                                                
+                                    </h3>
+
+                                </mat-card>
+
+
+                                <button mat-raised-button class="btn " matStepperNext="matStepperNext">Next</button>
+
+
+                            </mat-step>
+
+
+                            <mat-step>
+                                <ng-template matStepLabel="matStepLabel">QUANTITA</ng-template>
+
+
+<div class="container1">
+  <h1 class="text-center">SELEZIONA LA QUANTITA DI VOUCHER</h1>
+  
+  <br>
+  <br>
+  <br>
+  <h1 class="text-center">
+    <mat-label  for="quantity">Quantity </mat-label>
+    <input  type="number" id="quantity" name="quantity" min="1" max="100">
+  </h1>
+    
+    <br>
+    <br>
+    <h2 class="text-center">
+        prezzo totale:
+    </h2>
+
+    <h4>
+
+    </h4>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <br> 
+
+
+    <h5 class="text-center">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    </h5>
+
+</div>
+
+
+
+<button mat-raised-button class="btn " matStepperNext="matStepperNext">Next</button>
+                                <button mat-raised-button class="btn "  matStepperPrevious="matStepperPrevious">Back</button>
+                              
+                            </mat-step>
+
+
+                            <mat-step>
+                                <ng-template matStepLabel="matStepLabel">PAGAMENTO</ng-template>
+                                <button mat-button="mat-button" matStepperPrevious="matStepperPrevious">Back</button>
+                                <button mat-button="mat-button" matStepperNext="matStepperNext">Next</button>
+                            </mat-step>
+
+
+                        </mat-horizontal-stepper>
+                    </div> -->
+
+
+
+
+
+                   
+
+                  
+
+<div class="flex">
+    <div class="container1">
+
+        
+    </div>
+    <div class="container2" >
+       
+<h1 class="text-center">
+    {{name}}
+
+</h1>
+            
+    
+    
+         
+   
+</div>
+</div>
+
+
+<hr class="hr">
+
+<mat-horizontal-stepper class='stepperfixedheight-horizontal'
+#stepper
+>
+        <mat-step class='stepper'>
+            <ng-template matStepLabel="matStepLabel">INFO</ng-template>
+            <mat-card class="mat-card" >
+            <div class="partInfo">
+
+                <div class="title">
+                    CONDIZIONI DI UTILIZZO
+                </div>
+                <div class="container3">
+
+                </div>
+                
+                <div class="title">
+                    OTTIENI E RISCATTA IL TUO VOUCHER IN POCHI PASSI
+                </div>
+                <div class="container3">
+
+                </div>
+                
+                <div class="title">
+                    TERMINI E CONDIZIONI
+                </div>
+                <div class="container3">
+
+                </div>
+                
+            </div>
+            </mat-card>
+            <div class="flex1">
+                <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
+                <button mat-raised-button class="btn "  class="button" matStepperNext="matStepperNext">Procedi</button>
+            </div>
+           
+    </mat-step>
+   
+        
+
+        <mat-step >
+            <ng-template matStepLabel="matStepLabel">ORDINE</ng-template>
+        
+            <div class="titleOrdine">
+                <h1>
+                    QUANTITÀ DI VOUCHER
+                </h1>
+
+            </div>
+
+            <div class="container text-center">
+<button type="button" class="button3"  (click)="minus()"><mat-icon> remove</mat-icon></button>          
+<input type="text"  class="input1" [value]="quantity">
+<button type="button" class="button3" (click)="plus()"><mat-icon> add</mat-icon></button>
+
+            </div>
+
+            <hr class="hr1">
+            <div class="titleOrdine">
+                <h1>
+                    METODO DI PAGAMENTO
+                </h1>
+</div>
+
+
+
+
+
+
+                <form  >
+ <div class="form-group ">
+                       
+<mat-select  class="mat-select" formControlName="" >
+    <mat-option >
+
+        Carta di credito 
+    </mat-option> 
+
+    <mat-option >
+        Mobility Card
+    </mat-option> 
+
+    <mat-option >
+        Punti
+    </mat-option> 
+</mat-select>
+</div>
+</form>
+
+<div class="container4">
+
+    <div class="flex2">
+    <div>
+        <h1>
+           PREZZO TOTALE 
+        </h1>
+    </div>
+
+    <div>
+        <h1 class="counter">
+            {{discountValue}}
+        </h1>
+    </div>
+</div>
+</div>
+       
+
+<div class="text-bottom">
+<h1>
+    L’acquisto del Voucher è disciplinato dalle <a href="" class="condizioni"> <b>Condizioni Generali di Contratto</b> </a> predisposte da Movesion.
+</h1>
+</div>
+  
+           
+
+<div class="flex1">
+    <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
+    <button mat-raised-button class="btn "  class="button" matStepperNext="matStepperNext">Procedi</button>
+</div>
+        </mat-step>
+        
+
+        <mat-step>
+            <ng-template matStepLabel="matStepLabel">PAGAMENTO</ng-template>
+            <div class="text-center1">
+               DATI DI PAGAMENTO
+            </div>
+            <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+               
+                  <div class="form-group ">
+                      
+                        <input type="text" formControlName="Nome e Cognome del Titolare della Carta" class="form-control" placeholder="Nome e Cognome del Titolare della Carta"  >
+                  </div>
+                        <div class="form-group ">
+                         <input  type="text"formControlName="Email" class="form-control" placeholder="E-mail" > 
+                        </div>
+                       
+                      
+                        <div class="form-group">
+                        
+                        <input type="text"formControlName="Numero di telefono" class="form-control" placeholder="Numero di telefono" >   
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                        
+                        <input type="text" formControlName="Indirizzo" class="form-control" placeholder="Indirizzo" >
+                        </div>
+                    
+                        <div class="form-group">
+                        
+                        <input type="number" formControlName="Codice fiscale" class="form-control" placeholder="Codice fiscale" >
+                        </div>
+                            
+                     
+                      <div class="container5"> 
+                           
+                             <ngstr-create-token></ngstr-create-token>
+
+                         
+                      </div>
+                  
+        
+        
+                       
+                       
+                        <div class="flex3">
+                            <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
+                            <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="gotoCheckout()">Procedi</button>
+                        </div>
+        </form>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        </mat-step>
+
+    </mat-horizontal-stepper>
+
+
+
+
+   

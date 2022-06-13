@@ -1,20 +1,62 @@
-<div class="container">
 
-    <form class="example-form" id="example1">
-              <mat-form-field class="example-full-width-centered">
-              <span matPrefix> </span>
-              <input id="search" type="tel" matInput placeholder="Search" name= "search" >
-              <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-              </mat-form-field>
-              <br/>
-  
-              </form>
-      
-     <div class="example">
-          <a href="" class="box" >  </a>
-          
-        
-            
-            </div>
+<div class="flex">
+<div class="playertitle">
+
+    <h1 class="text-center">
+        Trenitalia
+
+    </h1>
+   </div>
+ <div id="material">
+    
+    <i class="material-icons" >  close</i>
+ </div>
+</div> 
+
+<hr class="border2">
+
+    <div class="title">
+        <h1>
+            ACQUISTO VOUCHER
+        </h1>
+    </div>
+
+
+    <div class="container1" >
      
-  </div>
+       
+        <div class="example" *ngFor="let item of GetAllDiscountsForPlayerOfCompanyList">
+
+            <div id="categories">
+                <a (click)="onClickForm(item)" limit=""  >
+                    {{item.name}}
+                   
+                </a>
+            </div>
+            <footer class="footer1">
+               <h3 class="text">
+                   scopri di piu
+               </h3>
+           </footer>
+        </div>
+
+
+
+
+    </div>
+
+
+    <!-- <div class="main">
+
+        <div class="example2" *ngFor="let item of GetAllDiscountsForPlayerOfCompanyList">
+            <div id="categories">
+
+                <a [routerLink]="['/purchase']">
+                    {{item.name}}
+
+
+                </a>
+
+
+            </div>
+        </div> -->

@@ -1,0 +1,38 @@
+
+
+.maincontainer{
+
+}
+
+
+#exampleModalLabel{
+text-align: center;
+}
+
+.flex{
+  
+display: flex;
+flex-direction: row;
+gap:10px;
+}
+
+.container{
+    width: 200px;
+height: 40px;
+background: #b5b5b5 0% 0% no-repeat padding-box;
+border-radius: 100px;
+opacity: 1;
+}
+
+.container1{
+  
+    box-shadow: #9a9a9a;
+    margin: 50px;
+    width: 1040px;
+   height:500px;
+    display: flex;
+}
+
+.table{
+   
+}

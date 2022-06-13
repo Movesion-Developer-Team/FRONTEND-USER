@@ -1,19 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 body{
 	margin:0;
-	color:rgb(100, 16, 16);
+	
+    overflow: hidden;
 
-	font:600 16px/18px 'Open Sans',sans-serif;
 
-
-	background-image: url(./assets/images/mmmm.jpg);
+	background-image: url(./assets/myBenefits/mybenefits-bg.jpg) ;
 
     background-repeat: no-repeat; 
-    background-position: center;
+   
+  
 
-	background-blend-mode:luminosity;
 	
 	-moz-background-size: cover;
     -o-background-size: cover;
@@ -26,4 +25,10 @@ body{
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+ 
+@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';

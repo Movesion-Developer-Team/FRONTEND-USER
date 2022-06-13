@@ -1,0 +1,45 @@
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #E3BE60 0% 0% no-repeat padding-box;
+    opacity: 1;
+    color: white;
+    text-align: center;
+    height: 60px;
+    display:inline-block;
+
+   overflow: hidden;
+ 
+ 
+  }
+.row{
+   display: flex;
+  flex-wrap: nowrap;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 19px;
+    gap:300px;
+
+}
+.column1{
+    width: 120px;
+    height: 28px;
+}
+
+
+  .s{
+ 
+
+    width: 232px;
+    height: 12px;
+    position: relative;
+}
+  
+
+.column3{
+float: right;
+margin-left: 350px;
+font-family: url(/src/assets/Ubuntu-Italic.ttf);
+}

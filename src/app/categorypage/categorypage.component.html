@@ -1,58 +1,66 @@
+<div class="invitation" *ngIf="notassigned">
 
 
-<div class=invitation *ngIf="notassigned">
+    <form [formGroup]="invitationForm" (ngSubmit)="submit()">
 
 
-
-<form  [formGroup]="invitationForm"  (ngSubmit)="submit()">
-  
-     
-      <div class="form-group ">
-        <label > <h1>register here</h1></label>
-        <input type="string"  class="form-control" formControlName="invitation" class="form-control" placeholder="invitation" >
-          </div>
-<button class="btn btn-warning " type="submit">send</button>
-</form>
-
+        <div class="form-group ">
+            <label>
+                <h1>register here</h1>
+            </label>
+            <input type="string" class="form-control" formcontrolname="invitation" class="form-control" placeholder="invitation">
+        </div>
+        <button class="btn btn-warning " type="submit">send</button>
+    </form>
 
 
 </div>
-
-
-
 
 
 <div *ngIf="assigned">
 
-<div class="container">
-  <div class="flex">
-    <div class="icon">
-      <a href="/home" class="btn btn-danger btn-block" > <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
-    </div>
-    <form class="example-form" id="example1">
-        <mat-form-field class="example-full-width-centered">
-        <span matPrefix> </span>
-        <input id="search" type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "term">
-        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-        </mat-form-field>
-        <br/>
-       
-        </form>
-       
-        
-      </div>
+    
 
-    <div *ngFor="let item of listinfo" class="example">
-      <a [routerLink]="['/players',item.id]" class="box" >  
-        {{item.name}}
+        <div class="flex">
 
-        
-       </a>
-      
-  
-      <!-- <button class="box" (click)="gotoplayer(item)"> a</button> -->
-  </div>
+
+            <div class="mainText">
+                <h1 class="text-left">scegli il benefit per te<br>
+                    e la tua famiglia.</h1>
+            </div>
+
+
+            <div class="vl"></div>
+
+            <div class="container1">
+             
+                <form action="/" method="GET" class="form">
+                    <input type="search" placeholder="Cerca Il tuo Benefit" class="search-field"/>
+                    <button type="submit" class="search-button">
+                        <span class="material-icons">search</span>
+                    </button>
+                </form>
+            </div>
+
+
+            <!-- <div class="sign">
+                <a href="/home"> <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
+              </div> -->
+
+        </div>
+
+<div class="main">
+<div class="example" *ngFor="let item of listinfo">
+<a class="text"[routerLink]="['/players',item.id]" >        
+{{item.name}}
+ </a>
+</div>
+</div>  
+
+
+
 
 </div>
 
-</div>
+
+

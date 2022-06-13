@@ -6,7 +6,7 @@ import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { CategoryBodyDto, GetAllCategoriesResponseDto } from '../models/GetAllCategoriesResponseDto';
 import {  HttpHeaders, HttpParams, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
+import { BaseBody, GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
 import { AuthService } from '../_services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateNewCategoryBodyDto } from '../models/CreateNewCategoryBodyDto';
@@ -24,7 +24,7 @@ import { companyId } from '../models/companyId';
 })
 export class CategorypageComponent implements OnInit {
   // listdata!:GetCurrentUserInfoResponseDto[];
-  listdata!:any
+  listdata!:BaseBody;
   term!: string;
   assigned=false
   notassigned=true

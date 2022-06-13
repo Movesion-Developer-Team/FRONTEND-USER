@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.container{
+
+    width: 500px;
+    height:250px;
+	background-color:rgb(240, 240, 240);
+    border: black solid 1px;
+    text-align: center;
+
+}
+.input{
+    border:none;
+    width: 200px;
+    box-shadow: whitesmoke;
+}
+
+.stripe-card{
+    margin-top: 50px;
+}
+
+.btn{
+    margin-top: 50px;
+    width: 150px;
+}

@@ -12,6 +12,11 @@ import { CategorypageComponent } from './categorypage/categorypage.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlayersComponent } from './players/players.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
+import { PurchaseComponent } from './purchase/purchase.component';
+import { StripeComponent } from './stripe/stripe.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MybenefitsComponent } from './mybenefits/mybenefits.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -23,7 +28,15 @@ const routes: Routes = [
   {path:'footer', component: FooterComponent},
   {path:'players/:categoryId', component: PlayersComponent },
   { path:'vouchers/:playersId', component: VouchersComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path:'categorypage/:categoryId/players/:playerId', component: VouchersComponent},
+
+  { path:'purchase/:playersId',component: PurchaseComponent},
+  {path:'stripe', component: StripeComponent},
+
+  {path:'checkout', component: CheckoutComponent},
+{path:'modal',component: ModalComponent},
+  {path:'mybenefits', component:MybenefitsComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 
 

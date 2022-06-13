@@ -16,7 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 
 
@@ -38,8 +38,28 @@ import { BackgroundComponent } from './background/background.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlayersComponent } from './players/players.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 
-
+import { NgxStripeModule } from 'ngx-stripe';
+import { StripeComponent } from './stripe/stripe.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MybenefitsComponent } from './mybenefits/mybenefits.component';
+import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
+import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
+import { MdbRangeModule } from 'mdb-angular-ui-kit/range';
+import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
+import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
+import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -59,6 +79,11 @@ import { VouchersComponent } from './vouchers/vouchers.component';
     FooterComponent,
     PlayersComponent,
     VouchersComponent,
+    PurchaseComponent,
+    StripeComponent,
+    CheckoutComponent,
+    MybenefitsComponent,
+    ModalComponent,
   ],
 
 
@@ -82,8 +107,42 @@ import { VouchersComponent } from './vouchers/vouchers.component';
     MaterialExampleModule,
     MatDialogModule,
     MatSidenavModule,
+  
+    MatListModule,
 
-    MatListModule
+    NgxStripeModule.forRoot('pk_test_51L8ip2FfGn5fJOchgEPyBjBCF8Tvr0fCY8T2OWkT6syBvVUFAFumFe1DmsdwkyqJqjgagJo6M7l8RAlHxTZyU5UL00SD24xMCO'),
+
+    MdbAccordionModule,
+
+    MdbCarouselModule,
+
+    MdbCheckboxModule,
+
+    MdbCollapseModule,
+
+    MdbDropdownModule,
+
+    MdbFormsModule,
+
+    MdbModalModule,
+
+    MdbPopoverModule,
+
+    MdbRadioModule,
+
+    MdbRangeModule,
+
+    MdbRippleModule,
+
+    MdbScrollspyModule,
+
+    MdbTabsModule,
+
+    MdbTooltipModule,
+
+    MdbValidationModule,
+
+    NoopAnimationsModule,
 
   ],
 

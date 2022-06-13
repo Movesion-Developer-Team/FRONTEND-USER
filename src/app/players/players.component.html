@@ -1,28 +1,47 @@
-<div class="container">
-  <div class="flex">
-    <div class="icon">
-      <a href="/home" class="btn btn-danger btn-block" > <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
+
+    <div class="flex">
+
+
+        <div class="mainText">
+            <h1 class="text-left">scegli il benefit per te<br>
+                e la tua famiglia.</h1>
+        </div>
+
+
+        <div class="vl"></div>
+
+        <div class="container1">
+         
+            <form action="/" method="GET" class="form">
+                <input type="search" placeholder="Cerca Il tuo Benefit" class="search-field"/>
+                <button type="submit" class="search-button">
+                    <span class="material-icons">search</span>
+                </button>
+            </form>
+        </div>
+
+
+        <!-- <div class="sign">
+            <a href="/home"> <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
+          </div> -->
+
     </div>
-    <form class="example-form" id="example1">
-        <mat-form-field class="example-full-width-centered">
-        <span matPrefix> </span>
-        <input id="search" type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "term">
-        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-        </mat-form-field>
-        <br/>
-       
-        </form>
-       
+
+    <hr class="border1">
+   <div *ngfor="let item of items">
+
+   </div>
+    <hr class="border2">
+
+        <div class="main">
+        <div class="example" *ngFor="let item of listinfo">
+        <a class="text"[routerLink]="['/vouchers',item.id]" >
+        {{item.shortName}}
+        </a>         
+        </div>
+        </div>
         
-      </div>
-    
-   <div class="example" *ngFor="let item of listinfo">
-        <a [routerLink]="['/vouchers',item.id]" class="box" > {{item.shortName}}  </a>
-        
-      
-          
-          </div>
    
-</div>
     
-    
+
+                  

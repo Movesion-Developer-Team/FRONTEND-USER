@@ -1,4 +1,11 @@
 export interface GetCurrentUserInfoResponseDto{
     message: string ;
-    companyId:number ;
+   statusCode:number;
+
+   companyId:BaseBody ;
+}
+
+
+export interface BaseBody{
+    id:number;
 }

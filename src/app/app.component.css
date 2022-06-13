@@ -1,11 +1,57 @@
 #app a {
 
-    color:red;
+    color:white
+
 }
 
 
-footer{
-    position: fixed;
-    bottom: 0;
+.navbar-brand{
+  margin-left: 89px;
+  padding: 0;
+}
+.vl{
+  border-left: 1px solid rgb(78, 78, 78);
+  height: 50px;
+  margin-left: 5px;
+}
+
+.footer{  
+    
     width: 100%;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+} 
+
+.items{
+margin-left: 100px;
 }
+.navbar-nav{
+  display:flex ;
+margin-right: 100px;
+
+}
+
+
+.mat-button{
+
+  color: #fff;
+}
+
+.mat-button :hover{
+  color:#999999;
+}
+.matmenu1{
+ background-color: aqua;
+}
+
+
+
+
+
+
+
+
+

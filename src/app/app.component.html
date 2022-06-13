@@ -1,9 +1,12 @@
+
+
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Movesion</a>
+  <nav class="navbar navbar-expand ">
+   
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a href="#" class="navbar-brand"><img src="../assets/myBenefits/mybenefits-logo.svg"  height="100px" width="230px" alt=""></a>
+     
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
@@ -16,22 +19,49 @@
       </li>
     </ul>
 
+
+
+
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register"><span class="material-icons">app_registration</span></a>
       </li>
+      
+   
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a href="/login" class="nav-link" routerLink="login"><span class="material-icons">login</span> </a>
       </li>
+    
+      
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
+      <li class="nav-item1">
+        <a href=# class="nav-link" routerLink="login"><span class="material-icons">menu</span> </a>
       </li>
+      <div class="vl"></div>
+
+      <li class="nav-item1">
+        <!-- <a href=# class="nav-link" routerLink="login"><span class="material-icons">person</span> </a> -->
+        <button mat-button [matMenuTriggerFor]="menu" class="mat-button"><span class="material-icons">person</span></button>
+
+<mat-menu #menu="matMenu" >
+
+  <button mat-menu-item (click)="openModal()" >I miei benefit</button>
+  <button mat-menu-item>myAccount </button>
+  <button mat-menu-item >Logout</button>
+
+</mat-menu>
+
+      </li>
+      <div class="vl"></div>
+      <li class="nav-item1">
+        <a href class="nav-link" (click)="logout()"><span class="material-icons">logout</span></a>
+      </li>
+    
     </ul>
   </nav>
 
@@ -39,21 +69,14 @@
 
 
 
+    
 
 
-
-    <router-outlet></router-outlet>
-
+    <router-outlet> </router-outlet>
+    
    
-</div>
+    <app-footer></app-footer>
 
-<footer>
-  <app-footer></app-footer>
-</footer>
-
-
-
-
-
+  </div>
 
 

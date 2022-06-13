@@ -4,6 +4,7 @@ import { NumberValueAccessor } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { CreateNewCategoryBodyDto } from '../models/CreateNewCategoryBodyDto';
+import { GetAllCategoriesForCompanyResponseDto } from '../models/GetAllCategoriesForCompanyResponseDto';
 import { CategoryBodyDto } from '../models/GetAllCategoriesResponseDto';
 import { GetAllPlayersResponseDto, PlayerBodyDto } from '../models/GetAllPlayersResponseDto';
 import { AuthService } from '../_services/auth.service';
@@ -27,6 +28,8 @@ export class PlayersComponent implements OnInit {
  
 
 
+
+
   constructor(private authService: AuthService,private http:HttpClient,private router:Router ,private route: ActivatedRoute) {
 
 
@@ -36,10 +39,11 @@ export class PlayersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.id=this.router.getCurrentNavigation()?.extras?.state?['id']:
-   
-    let categoryId= this.route.snapshot.params['categoryId'];
 
+
+    let categoryId= this.route.snapshot.params['categoryId'];
+//     let categoryName = this.route.snapshot.params['categoryName']
+// console.log(categoryName)
     
     this.http.get<GetAllPlayersResponseDto>('https://localhost:7098/Category/GetAllPlayersForCurrentCategory?categoryId='+ categoryId).pipe(
       map(result => result.players)
@@ -53,6 +57,11 @@ export class PlayersComponent implements OnInit {
 
   }
 
+
+  gohere(){
+    this.router.navigateByUrl('/categorypage');
+    
+  }
 
 
 
