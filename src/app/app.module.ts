@@ -60,7 +60,7 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { ModalComponent } from './modal/modal.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -143,6 +143,7 @@ import { ModalComponent } from './modal/modal.component';
     MdbValidationModule,
 
     NoopAnimationsModule,
+    Ng2SearchPipeModule,
 
   ],
 

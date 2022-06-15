@@ -24,10 +24,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'categorypage', component: CategorypageComponent},
+  { path: 'categorypage', component: CategorypageComponent }, 
+  // canActivate: [ifLoggedIn]
   {path:'footer', component: FooterComponent},
-  {path:'players/:categoryId', component: PlayersComponent },
-  { path:'vouchers/:playersId', component: VouchersComponent},
+  {path:'players/:categoryId/:categoryName', component: PlayersComponent },
+  { path:'vouchers/:playersId/:playerName', component: VouchersComponent},
   { path:'categorypage/:categoryId/players/:playerId', component: VouchersComponent},
 
   { path:'purchase/:playersId',component: PurchaseComponent},

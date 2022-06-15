@@ -11,12 +11,11 @@
         <div class="vl"></div>
 
         <div class="container1">
-         
-            <form action="/" method="GET" class="form">
-                <input type="search" placeholder="Cerca Il tuo Benefit" class="search-field"/>
-                <button type="submit" class="search-button">
-                    <span class="material-icons">search</span>
-                </button>
+            <form [formGroup]="search" (ngSubmit)="submit()" >
+                <div class="form-group">
+                <input type="text" formControlName="playerName" class="form-control" [(ngModel)]="searchText" placeholder="Cerca Il tuo Benefit" />
+                <button type="submit" class="search-btn"> <span class="material-icons">search</span> </button>
+                 </div>
             </form>
         </div>
 
@@ -27,21 +26,25 @@
 
     </div>
 
+    
     <hr class="border1">
-   <div *ngfor="let item of items">
+    <div class="categoryName">
+ {{parameterValue}}
+    </div>
 
-   </div>
+          
     <hr class="border2">
 
         <div class="main">
-        <div class="example" *ngFor="let item of listinfo">
-        <a class="text"[routerLink]="['/vouchers',item.id]" >
+        <div class="example" *ngFor="let item of listinfo| filter:searchText">
+        <a class="text" [routerLink]="['/vouchers',item.id,item.name]" >
         {{item.shortName}}
+        <img [src]="getImage">
         </a>         
         </div>
         </div>
         
    
-    
+
 
                   

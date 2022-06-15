@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -26,11 +26,14 @@ name:string;
   playerId!: number  ;
 
   discountValue!: number;
+
+  DiscountId!:number;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,public dialogRef: MatDialogRef<PurchaseComponent>,private route: ActivatedRoute,private authService: AuthService,private http:HttpClient,private router:Router ,private fb : FormBuilder) { this.playerId = data.playerId;
     this.name=data.Name;
   this.discountValue=data.discountValue;
+  this.DiscountId=data.id;
   }
  
   ngOnInit(): void {
@@ -45,8 +48,32 @@ plus(){
   if(this.i !=50)
   this.i++;
   this.quantity=this.i;
-  this.discountValue=this.discountValue*this.i;
+  // this.discountValue=this.discountValue*this.i;
+
+
+
+
+
+// var discountId= this.
+
+var discountId=this.DiscountId;
+var quantity=this.quantity
+  this.authService.Purchase( discountId, quantity).subscribe({
+    next: data => {
+
+      
+      console.log(data.totalAmount);
+    
+      
+   
+      
+    },
+    error: err => {
+   
+    }
+  });
 }
+
 
 
 minus(){
