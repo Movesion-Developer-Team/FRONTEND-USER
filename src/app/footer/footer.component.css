@@ -1,5 +1,5 @@
 .footer {
-    position: absolute;
+    position:absolute;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -8,38 +8,39 @@
     color: white;
     text-align: center;
     height: 60px;
-    display:inline-block;
+   display:inline-flex;
 
    overflow: hidden;
  
  
   }
 .row{
-   display: flex;
-  flex-wrap: nowrap;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 19px;
-    gap:300px;
+margin-top: 20px;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   
 
 }
 .column1{
     width: 120px;
     height: 28px;
+    margin-left: 100px;
 }
 
 
-  .s{
+  .s {
  
-
+ margin-right: 100px;
+    float: right;
     width: 232px;
     height: 12px;
-    position: relative;
+   
 }
   
 
 .column3{
 float: right;
+margin-right: 100px;
 margin-left: 350px;
 font-family: url(/src/assets/Ubuntu-Italic.ttf);
 }

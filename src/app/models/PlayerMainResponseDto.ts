@@ -1,12 +1,12 @@
-export interface GetAllPlayersResponseDto{
+export interface FindPlayerByIdResponseDto{
     message: string;
     statusCode: string;
-    players:PlayerBodyDto[];
+    players:PlayerWithCategoriesAndDiscountTypesBodyDto[];
 
 }
 
 
-export interface PlayerBodyDto{
+export interface PlayerWithCategoriesAndDiscountTypesBodyDto{
 id: number| undefined;
 shortName	:string;
 fullName:	string;
@@ -14,18 +14,11 @@ playStoreLink	:string
 appStoreLink:	string
 linkDescription	:string
 color:	string;
-image: BaseImageBodyDto;
 discountTypes:DiscountTypeBodyDto[];
 categories:CategoryBodyDto[]
 
 }
 
-export interface BaseImageBodyDto{
-    id: number;
-    content: string;
-    categoryId: number;
-    playerId: number;
-}
 
 export interface DiscountTypeBodyDto{
 

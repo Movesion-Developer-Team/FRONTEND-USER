@@ -9,6 +9,7 @@ import { companyId } from '../models/companyId';
 import { DiscountBodyDto, GetAllDiscountsForPlayerResponseDto } from '../models/GetAllDiscountsForPlayerResponseDto';
 import { GetAllPlayersResponseDto, PlayerBodyDto } from '../models/GetAllPlayersResponseDto';
 import { BaseBody, GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
+import { FindPlayerByIdResponseDto, PlayerWithCategoriesAndDiscountTypesBodyDto } from '../models/PlayerMainResponseDto';
 import { PurchaseComponent } from '../purchase/purchase.component';
 import { AuthService } from '../_services/auth.service';
 
@@ -20,11 +21,11 @@ import { AuthService } from '../_services/auth.service';
 export class VouchersComponent implements OnInit {
   term!: string;
   GetAllDiscountsForPlayerOfCompanyList!:DiscountBodyDto[];
-  listinfo!:PlayerBodyDto[];
-listdata!:BaseBody
+  // listinfo!:PlayerBodyDto[];
+listdata!:BaseBody;
 data!:number ;
-// salar:number[] = []
-   
+
+PlayerList!:PlayerWithCategoriesAndDiscountTypesBodyDto[];
 
 
   constructor(private dialog: MatDialog,private authService: AuthService,private http:HttpClient,private router:Router ,private route: ActivatedRoute,private fb : FormBuilder) {
@@ -35,6 +36,7 @@ data!:number ;
    }
 
   ngOnInit(): void {
+    this.getplayer();
     this.getCompanyId();
     
   }
@@ -76,24 +78,23 @@ getCompanyId(){
 
 })
 
-
-
-
-
-
-
-    
-    
- 
-   
-  
-
-
-
  }
 
+getplayer(){
+  var lon= this.route.snapshot.params['playersId'];
+  this.http.get<FindPlayerByIdResponseDto>('https://localhost:7098/Player/FindById?id='+lon).pipe(
+    map(res=>res.players)
+  ).subscribe(data=>{
+    this.PlayerList=data;
+    console.log(this.PlayerList);
+  })
+}
 
 
+
+
+
+ 
 
  onClickForm(item: DiscountBodyDto){
   this.dialog.open(PurchaseComponent, {
@@ -103,7 +104,8 @@ getCompanyId(){
     data: {
       playerId:item.playerId,
       discountValue:item.discountValue,
-      Name:item.name
+      Name:item.name,
+      DiscountId:item.id
     },
     panelClass: 'modalBox',
   })

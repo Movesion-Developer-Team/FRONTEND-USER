@@ -14,6 +14,7 @@ import { companyBodyDto } from '../models/companyBodyDto';
 import { GetAllCategoriesForCompanyResponseDto } from '../models/GetAllCategoriesForCompanyResponseDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { companyId } from '../models/companyId';
+import { GetAllPlayersForCurrentCompanyResponseDto, PlayerOnlyBodyDto } from '../models/GetAllPlayersForCurrentCompanyResponseDto';
 
 
 
@@ -24,25 +25,32 @@ import { companyId } from '../models/companyId';
 })
 export class CategorypageComponent implements OnInit {
   // listdata!:GetCurrentUserInfoResponseDto[];
-  listdata!:BaseBody;
-  term!: string;
-  assigned=false
-  notassigned=true
- invitationForm!:FormGroup
- listinfo!:CategoryBodyDto[];
- searchTerm!: string;
+listdata!:BaseBody;
+term!: string;
+assigned=false
+notassigned=true
+invitationForm!:FormGroup
+listinfo!:CategoryBodyDto[];
 
+searchText!: string;
 listcategory!:CreateNewCategoryBodyDto[];
 //  companyId: number | undefined ;
 
-
-
-
+search!:FormGroup
+searchList!: PlayerOnlyBodyDto[];
+playerShow= true;
   constructor(private fb : FormBuilder,private authService: AuthService,private http:HttpClient,private router:Router) { 
   this.invitationForm=this.fb.group({
      invitation:['',Validators.required],
+
   })
 
+
+
+
+  this.search = this.fb.group({
+    playerName:['',Validators.required],
+  })
 
 }
 
@@ -88,6 +96,7 @@ this.http.get<GetAllCategoriesForCompanyResponseDto>('https://localhost:7098/Cat
 ).subscribe({
   next: data => {
   this.listinfo = data; 
+  console.log
 },
 
 })
@@ -107,7 +116,28 @@ console.log(item.id);
 
 
 
-submit(){}
+submit(){
+
+
+
+
+var name=this.search.get('playerName')?.value;
+console.log(name)
+
+ this.http.get<GetAllPlayersForCurrentCompanyResponseDto>('https://localhost:7098/Company/SearchForPlayerOfCompany?playerName='+name).pipe(
+  map(result=>result.players)
+ ).subscribe({
+  next:data=>{
+  this.searchList=data;
+  this.playerShow=false;
+  console.log(data)
+  }
+ })
+
+
+
+  console.log('salam')
+}
 
 
 

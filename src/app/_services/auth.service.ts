@@ -9,6 +9,7 @@ import { IdentityUserDto } from '../models/register.model';
 import { LoginBodyDto } from '../models/loginBodyDto';
 import { CategoryBodyDto, GetAllCategoriesResponseDto } from '../models/GetAllCategoriesResponseDto';
 import { GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
+import { GetTotalAmountResponseDto } from '../models/GetTotalAmountResponseDto';
 
 
 
@@ -55,6 +56,27 @@ listData!:CategoryBodyDto[];
     }, httpOptions);
   }
   
+
+
+
+
+Purchase(discountId:number,quantity:number): Observable<GetTotalAmountResponseDto>{
+
+  return this.http.post<GetTotalAmountResponseDto>(Company_API + 'Purchase/GetTotalAmount', {
+
+ discountId,
+ quantity
+
+
+
+  },httpOptions);
+  
+}
+
+
+
+
+
 
 
   getcategory (){
