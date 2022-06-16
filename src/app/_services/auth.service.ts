@@ -62,14 +62,7 @@ listData!:CategoryBodyDto[];
 
 Purchase(discountId:number,quantity:number): Observable<GetTotalAmountResponseDto>{
 
-  return this.http.post<GetTotalAmountResponseDto>(Company_API + 'Purchase/GetTotalAmount', {
-
- discountId,
- quantity
-
-
-
-  },httpOptions);
+  return this.http.post<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTotalAmount?discountId=' + discountId ,'&quantity='+ quantity ,httpOptions)
   
 }
 

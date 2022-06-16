@@ -28,7 +28,7 @@ const routes: Routes = [
   // canActivate: [ifLoggedIn]
   {path:'footer', component: FooterComponent},
   {path:'players/:categoryId/:categoryName', component: PlayersComponent },
-  { path:'vouchers/:playersId/:playerName', component: VouchersComponent},
+  { path:'vouchers/:playersId/:playershortName', component: VouchersComponent},
   { path:'categorypage/:categoryId/players/:playerId', component: VouchersComponent},
 
   { path:'purchase/:playersId',component: PurchaseComponent},

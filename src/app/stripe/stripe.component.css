@@ -6,12 +6,32 @@ body{
 
 .container{
 
-    width: 500px;
-    height:250px;
-	background-color:rgb(240, 240, 240);
-    border: black solid 1px;
-    text-align: center;
+    margin:0;
+	
+        
+    
+    
+    /* background-image: url(/src/assets/images/Stripe-Logo.png) ; */
 
+    background-repeat: no-repeat; 
+   
+  
+
+    
+
+    height:100%;
+    width:100%; 
+     width: 500px;
+height: 220px;
+
+border: #ededed solid;
+
+
+
+
+/* background: #FFFFFF 0% 0% no-repeat padding-box; */
+border-radius: 10px;
+opacity: 1; 
 }
 .input{
     border:none;

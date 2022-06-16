@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
   StripeCardElementOptions,
@@ -37,11 +36,12 @@ export class StripeComponent implements OnInit {
 
   stripeTest!: FormGroup;
 
-  constructor(private fb: FormBuilder, private stripeService: StripeService) {}
+  constructor(private fb: FormBuilder, private stripeService: StripeService ) {}
 
   ngOnInit(): void {
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
+      
     });
   }
 
@@ -61,4 +61,12 @@ export class StripeComponent implements OnInit {
         }
       });
   }
+
+
+
+
+
+
+
+  
 }

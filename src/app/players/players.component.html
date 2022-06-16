@@ -37,7 +37,7 @@
 
         <div class="main">
         <div class="example" *ngFor="let item of listinfo| filter:searchText">
-        <a class="text" [routerLink]="['/vouchers',item.id,item.name]" >
+        <a class="text" [routerLink]="['/vouchers',item.id,item.shortName]" >
         {{item.shortName}}
         <img [src]="getImage">
         </a>         
