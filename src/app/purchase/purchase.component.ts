@@ -8,6 +8,7 @@ import { CheckoutComponent } from '../checkout/checkout.component';
 import { DiscountBodyDto, GetAllDiscountsForPlayerResponseDto } from '../models/GetAllDiscountsForPlayerResponseDto';
 import { BaseBody, GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
 import { GetTotalAmountResponseDto } from '../models/GetTotalAmountResponseDto';
+import { PaymentIntentResponseDto } from '../models/PaymentIntent';
 import { FindPlayerByIdResponseDto, PlayerWithCategoriesAndDiscountTypesBodyDto } from '../models/PlayerMainResponseDto';
 import { StripeComponent } from '../stripe/stripe.component';
 import { AuthService } from '../_services/auth.service';
@@ -35,10 +36,7 @@ export class PurchaseComponent implements OnInit {
 
   PlayerList!:PlayerWithCategoriesAndDiscountTypesBodyDto[];
 
-
- 
-
-
+ listSecret!:string;
 
 
   constructor(
@@ -213,6 +211,51 @@ gotoCheckout(){
 
 
 }
+
+
+Proceed(){
+  const discountId = this.DiscountId;
+
+ 
+  var quantity=this.quantity;
+
+this.http.get<PaymentIntentResponseDto>('https://localhost:7098/Stripe/CreatePaymentIntent?discountId='+ discountId +'&&numberOfCodes=' + quantity).pipe(
+  map(result => result.clientSecret)
+).subscribe(
+  data => {
+    
+  this.listSecret = data
+
+
+}
+
+
+)
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
