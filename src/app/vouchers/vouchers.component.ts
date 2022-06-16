@@ -99,13 +99,14 @@ getplayer(){
  onClickForm(item: DiscountBodyDto){
   this.dialog.open(PurchaseComponent, {
     width: '620px',
-    height:'92%',
+    height:'98%',
  
     data: {
       playerId:item.playerId,
       discountValue:item.discountValue,
       Name:item.name,
       DiscountId:item.id
+      
     },
     panelClass: 'modalBox',
   })

@@ -250,11 +250,11 @@ opacity: 1;
     
         height:100%;
         width:100%; 
-         width: 521px;
+         width: 500px;
 height: 220px;
 
 border: #ededed solid;
-margin-bottom: 40px;
+
 margin-top: 10px;
 
 
@@ -279,6 +279,5 @@ opacity: 1;
 .flex3{
     display: flex;
     flex-direction: row;
-    margin-top: 
-    50px;
+  margin-top: 10px;
 }

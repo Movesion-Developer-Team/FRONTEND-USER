@@ -106,9 +106,10 @@
                   
 
 <div class="flex">
-    <div class="container1">
-
-        
+    <div class="container2" *ngFor="let item of PlayerList">
+        <h1 class="text-center">
+        {{item.shortName}}
+    </h1>
     </div>
     <div class="container2" >
        
@@ -227,7 +228,7 @@
 
     <div>
         <h1 class="counter">
-            {{discountValue}}
+            {{listAmount}}
         </h1>
     </div>
 </div>
@@ -284,7 +285,7 @@
                      
                       <div class="container5"> 
                            
-                             <ngstr-create-token></ngstr-create-token>
+                             <ngstr-create-token>  </ngstr-create-token>
 
                          
                       </div>
@@ -295,7 +296,7 @@
                        
                         <div class="flex3">
                             <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
-                            <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="gotoCheckout()">Procedi</button>
+                            <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="Proceed()">Procedi</button>
                         </div>
         </form>
 
