@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NumberValueAccessor, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -13,12 +13,27 @@ import { FindPlayerByIdResponseDto, PlayerWithCategoriesAndDiscountTypesBodyDto 
 import { StripeComponent } from '../stripe/stripe.component';
 import { AuthService } from '../_services/auth.service';
 
+import { StripeService, StripeCardComponent } from 'ngx-stripe';
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions
+} from '@stripe/stripe-js';
+import { getMatIconNoHttpProviderError } from '@angular/material/icon';
+
+
+declare var Stripe: any;
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
+ 
+
+
+
+
+
   public parameterValue!: string;
   paymentMethods!:FormGroup;
 
@@ -33,13 +48,38 @@ export class PurchaseComponent implements OnInit {
  listAmount!:number;
   DiscountId!:number;
 
+  stripe!:any;
+  cardElement!:any;
+
 
   PlayerList!:PlayerWithCategoriesAndDiscountTypesBodyDto[];
 
  listSecret!:string;
+ @ViewChild(StripeCardComponent) card!: StripeCardComponent;
+
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: '#666EE8',
+        color: '#31325F',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+        '::placeholder': {
+          color: '#CFD7E0'
+        }
+      }
+    }
+  };
+
+  elementsOptions: StripeElementsOptions = {
+    locale: 'it'
+  };
+
+  stripeTest!: FormGroup;
 
 
-  constructor(
+  constructor(private stripeService: StripeService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,public dialogRef: MatDialogRef<PurchaseComponent>,private route: ActivatedRoute,private authService: AuthService,private http:HttpClient,private router:Router ,private fb : FormBuilder) { this.playerId = data.playerId;
     this.name=data.Name;
@@ -48,7 +88,10 @@ export class PurchaseComponent implements OnInit {
   }
  
   ngOnInit(): void {
-
+    this.stripeTest = this.fb.group({
+      name: ['', [Validators.required]]
+      
+    });
   
     this.getCompanyId();
     this.getplayer();
@@ -225,7 +268,7 @@ this.http.get<PaymentIntentResponseDto>('https://localhost:7098/Stripe/CreatePay
   data => {
     
   this.listSecret = data
-
+console.log(this.listSecret);
 
 }
 
@@ -237,13 +280,73 @@ this.http.get<PaymentIntentResponseDto>('https://localhost:7098/Stripe/CreatePay
 }
 
 
+ngAfterViewInit() {
+  this.payment();
+ 
+  }
+
+   payment() {
+
+   this.stripe = Stripe('pk_test_51L8ip2FfGn5fJOchgEPyBjBCF8Tvr0fCY8T2OWkT6syBvVUFAFumFe1DmsdwkyqJqjgagJo6M7l8RAlHxTZyU5UL00SD24xMCO');
+   var elements = this.stripe.elements();
+   var style = {
+   base: {
+   iconColor: '#666EE8',
+   color: '#31325F',
+   lineHeight: '50px',
+   fontWeight: 400,
+   fontFamily: 'Helvetica Neue',
+   fontSize: '18px',
+   '::placeholder': {
+     color: '#CFD7E0',
+     },
+    },
+  };
+  this.cardElement = elements.create('card', { style: style });
+  this.cardElement.mount('#card-element');
+  }
+  sendPayment() {
+    this.Proceed();
 
 
+  this.stripe
+ .confirmCardPayment(
+  this.listSecret,
+   {
+     payment_method: { card: this.cardElement },
+     
+   }
+ )
+ .then(function (result: { error: string; }) {
+   if (result.error) {
+     console.log(result.error, ' ==== error');
+   } else {
+     console.log('success ==== ', result);
+   }
+   
+ });
+
+ 
+  }
 
 
+createToken(): void {
+  // this.Proceed();
+//   const name = this.stripeTest.get('name')?.value;
 
-
-
+//   this.stripeService
+//     .createToken(this.card.element,{name})
+//     .subscribe((result) => {
+//       if (result.token) {
+//         // Use the token
+//         console.log(result.token.id);
+//       } else if (result.error) {
+//         // Error creating the token
+//      alert(result.error.message);
+//       }
+//     });
+// }
+}
 
 
 

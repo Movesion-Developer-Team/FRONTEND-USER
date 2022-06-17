@@ -31,7 +31,7 @@ export class StripeComponent implements OnInit {
   };
 
   elementsOptions: StripeElementsOptions = {
-    locale: 'es'
+    locale: 'it'
   };
 
   stripeTest!: FormGroup;
@@ -47,10 +47,10 @@ export class StripeComponent implements OnInit {
 
 
   createToken(): void {
-    // const name = this.stripeTest.get('name').value;
+    const name = this.stripeTest.get('name')?.value;
 
     this.stripeService
-      .createToken(this.card.element,{})
+      .createToken(this.card.element,{name})
       .subscribe((result) => {
         if (result.token) {
           // Use the token
