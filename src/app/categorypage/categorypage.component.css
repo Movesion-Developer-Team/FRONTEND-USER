@@ -176,7 +176,7 @@
 .container1 {
   width: 344px;
   height: 50px;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #adadad 0% 0% no-repeat padding-box;
   border-radius: 25px;
   margin-top: 72px;
   margin-left: 20px;
@@ -210,7 +210,7 @@ border: none;
   text-align: left;
   font: normal normal bold 18px/31px Ubuntu;
   letter-spacing: 0.45px;
-  color: #ffffff;
+  color: #131313;
   margin-left: 19px;
 }
 

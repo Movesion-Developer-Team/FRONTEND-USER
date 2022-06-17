@@ -140,21 +140,21 @@
                     CONDIZIONI DI UTILIZZO
                 </div>
                 <div class="container3">
-
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, doloribus doloremque quo libero quis earum quas possimus iste maiores, suscipit dolor et sint itaque molestias eveniet temporibus maxime accusantium dolores?
                 </div>
                 
                 <div class="title">
                     OTTIENI E RISCATTA IL TUO VOUCHER IN POCHI PASSI
                 </div>
                 <div class="container3">
-
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, itaque debitis dicta vel, dolorem veritatis reiciendis atque distinctio quisquam, at aut velit architecto. Itaque neque tenetur minus excepturi, eos error.
                 </div>
                 
                 <div class="title">
                     TERMINI E CONDIZIONI
                 </div>
                 <div class="container3">
-
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias voluptatum incidunt facere eos totam impedit nemo sint adipisci fugit dolore doloribus, ipsum, quas et ipsam. Veniam odio necessitatibus tempore.
                 </div>
                 
             </div>
@@ -178,7 +178,7 @@
 
             </div>
 
-            <div class="container text-center">
+            <div class="container6 text-center">
 <button type="button" class="button3"  (click)="minus()"><mat-icon> remove</mat-icon></button>          
 <input type="text"  class="input1" [value]="quantity">
 <button type="button" class="button3" (click)="plus()"><mat-icon> add</mat-icon></button>
@@ -285,18 +285,45 @@
                      
                       <div class="container5"> 
                            
-                             <ngstr-create-token>  </ngstr-create-token>
+                        <label>
+<h1 class="text-center">Card Details</h1>
+  <!-- placeholder for Elements -->
+  <div id="card-element" class="field"></div>
+</label>
+<button type="submit" class="btn btn-warning " (click)="sendPayment()">Submit Payment</button>
+  
+                            <!-- <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+                                <div class="container" >
+                              <label for="name"> INFO</label> <br>
+                              <input type="text" class="input" formControlName="name" placeholder="name and surname">
+                              <div class="stripe-card">
+                                <ngx-stripe-card 
+                                [options]="cardOptions"
+                                [elementsOptions]="elementsOptions"
+                              ></ngx-stripe-card>
+                              </div>
+                            
+                              <button type="submit" class="btn btn-warning " >
+                              pay
+                              </button>
+
+                            </div >
+                            </form> -->
+                            
+                            
+                         
 
                          
                       </div>
                   
         
-        
+                     
+
                        
                        
                         <div class="flex3">
-                            <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
-                            <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="Proceed()">Procedi</button>
+                            <button mat-button class="btn" class="button10" (click)="onNoClick()">Chiudi</button>
+                            <!-- <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="onNoClick()">Procedi</button> -->
                         </div>
         </form>
 
@@ -309,9 +336,10 @@
 
 
 
+
         
-
-
+        
+          
         </mat-step>
 
     </mat-horizontal-stepper>
@@ -319,4 +347,4 @@
 
 
 
-   
+  

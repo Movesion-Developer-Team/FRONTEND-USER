@@ -65,7 +65,7 @@
 
 <div class="main"  >
     <div class="example" *ngFor="let item of searchList ">
-    <a class="text"[routerLink]="['/vouchers',item.id]" >        
+    <a class="text"[routerLink]="['/vouchers',item.id,item.shortName]" >        
     {{item.shortName}}
      </a>
     </div>
