@@ -17,7 +17,7 @@ color:	string;
 image: BaseImageBodyDto;
 discountTypes:DiscountTypeBodyDto[];
 categories:CategoryBodyDto[]
-
+tempImage: any | undefined;
 }
 
 export interface BaseImageBodyDto{

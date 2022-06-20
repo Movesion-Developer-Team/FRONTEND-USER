@@ -23,11 +23,17 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
     const checkToken =JSON.parse(this.token.getToken() as any).token;
+    
+
     req = (checkToken && checkToken != null) ? req.clone({
     
-      setHeaders: {
-        Authorization: `Bearer ${checkToken}`
-      },
+
+     
+      
+       setHeaders: {
+          Authorization: `Bearer ${checkToken}`,
+         
+       },
       // setParams: {
       //   lang: this.translate.currentLang
       // }

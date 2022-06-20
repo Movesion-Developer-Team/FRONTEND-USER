@@ -18,7 +18,7 @@ body{
 }
 
 .text-bottom{
-    font:Ubuntu, Regular
+    font-family :Ubuntu
     16px;
     text-align: center;
 letter-spacing: 0.4px;
@@ -70,6 +70,7 @@ font-size:22px;
 margin-left: 20px;
 display: flex;
 gap: 10px;
+max-width: 700px;
 }
 
 .container2{
@@ -98,6 +99,7 @@ height: 320px;
 .partInfo{
 text-align: left;
 font: normal normal medium 12px/31px Ubuntu;
+font-family: 'Ubuntu', sans-serif !important;
 letter-spacing: 0.3px;
 color: #30373A;
 opacity: 1;
@@ -349,7 +351,18 @@ opacity: 1;
 .stripe-card{
     margin-top: 50px;
 }
+.image{
+    width:250px;
+    height: 80px;
+    border-radius: 20px;
+    text-align: center;  
+    opacity: 1;
+  flex-direction: row;
+  text-align: center;
+  position:relative;
+  border: 3px solid #E3BE60;
 
+  }
 .btn{
     margin-left: 180px;
     margin-top: 40px;

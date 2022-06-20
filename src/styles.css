@@ -24,11 +24,13 @@ body{
 
 
 
-html, body { height: 100%; }
-
+html, body { height: 100%; 
+font-family: 'Ubuntu', sans-serif !important;
+}
+/* 
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
  
-@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+@import '~mdb-angular-ui-kit/assets/scss/mdb.scss'; */

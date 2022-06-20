@@ -107,8 +107,9 @@
 
 <div class="flex">
     <div class="container2" *ngFor="let item of PlayerList">
-        <h1 class="text-center">
-        {{item.shortName}}
+        <h1 >
+            <img [src]="'https://localhost:7098/Player/GetImageOfPlayer?PlayerId='+item.id" 
+            class="image" >
     </h1>
     </div>
     <div class="container2" >
@@ -285,33 +286,15 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias vol
                      
                       <div class="container5"> 
                            
-                        <label>
+                        <!-- <label>
 <h1 class="text-center">Card Details</h1>
-  <!-- placeholder for Elements -->
+
   <div id="card-element" class="field"></div>
 </label>
-<button type="submit" class="btn btn-warning " (click)="sendPayment()">Submit Payment</button>
+<button type="submit" class="btn btn-warning " (click)="sendPayment()">Submit Payment</button> -->
   
-                            <!-- <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
-                                <div class="container" >
-                              <label for="name"> INFO</label> <br>
-                              <input type="text" class="input" formControlName="name" placeholder="name and surname">
-                              <div class="stripe-card">
-                                <ngx-stripe-card 
-                                [options]="cardOptions"
-                                [elementsOptions]="elementsOptions"
-                              ></ngx-stripe-card>
-                              </div>
+                       
                             
-                              <button type="submit" class="btn btn-warning " >
-                              pay
-                              </button>
-
-                            </div >
-                            </form> -->
-                            
-                            
-                         
 
                          
                       </div>
@@ -338,8 +321,34 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias vol
 
 
         
-        
-          
+        <div [formGroup]="paymentElementForm">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input matInput placeholder="name" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input matInput placeholder="Email" type="email" formControlName="email" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input matInput placeholder="Address" formControlName="address" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input matInput placeholder="ZIP Code" formControlName="zipcode" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input matInput placeholder="city" formControlName="city" />
+            </mat-form-field>
+            <ng-container >
+              <ngx-stripe-payment >
+
+
+              </ngx-stripe-payment>
+            </ng-container>
+            <button (click)="pay()">PAY</button>
+          </div>
+     
+         
+
+
         </mat-step>
 
     </mat-horizontal-stepper>
