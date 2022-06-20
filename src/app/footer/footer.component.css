@@ -42,5 +42,5 @@ margin-top: 20px;
 float: right;
 margin-right: 100px;
 margin-left: 350px;
-font-family: url(/src/assets/Ubuntu-Italic.ttf);
+font-family: 'Ubuntu', sans-serif !important;
 }

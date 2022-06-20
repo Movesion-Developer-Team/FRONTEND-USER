@@ -241,9 +241,8 @@ input:focus {
 }
 
 
-.example{
+/* .example{
 margin-top: 35px;
-
 width: 219px;
 height: 80px;
 border: 3px solid #E3BE60;
@@ -255,14 +254,20 @@ font: normal normal bold 25px/35px ;
 letter-spacing: 1.25px;
 position:relative;
 opacity: 1;
-margin-top: 26px;
 
+} */
 
-
-
-
+.image{
+  width: 219px;
+  height: 80px;
+  border-radius: 20px;
+  text-align: center;  
+  opacity: 1;
+flex-direction: row;
+text-align: center;
+position:relative;
+border: 3px solid #E3BE60;
 }
-
 
 
 
@@ -281,12 +286,12 @@ color: #FFFFFF;
 }
 
 
-.example a{
+/* .example a{
     text-align: center;
     text-decoration: none;
     font-size: 25px;
     display:inline-block;
-}
+} */
 
 
 
@@ -297,7 +302,6 @@ color: #FFFFFF;
   flex-wrap: wrap;
   gap:20px;
   order:3;
-  
   max-width: 700px;
 }
 
@@ -316,10 +320,12 @@ color: #FFFFFF;
 
 
 .main :hover{
-transform: scale(1.1);
-background-color: #ffffff;
-color:#000 ;
+transform: scale(1.05);
+/* background-color: #ffffff;
+color:#000 ; */
 transition: 0.3s;
+cursor:pointer black;
+
 }
 
 

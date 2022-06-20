@@ -1,14 +1,14 @@
 
 <div class="flex">
 <div class="playertitle">
-
     <h1 class="text-center" *ngFor="let item of PlayerList">
-      {{item.shortName}}
-
+      <!-- {{item.shortName}} -->
+      <img [src]="'https://localhost:7098/Player/GetImageOfPlayer?PlayerId='+item.id" 
+      class="image" >
     </h1>
    </div>
  <div id="material">
-    <i class="material-icons" >  close</i>
+   <a routerLink="/categorypage"> <i class="material-icons" >  close</i></a> 
  </div>
 </div> 
 

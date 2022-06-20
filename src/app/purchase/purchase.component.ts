@@ -15,10 +15,16 @@ import { AuthService } from '../_services/auth.service';
 
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
-  StripeCardElementOptions,
-  StripeElementsOptions
-} from '@stripe/stripe-js';
+  StripeCardElementOptions} from '@stripe/stripe-js';
 import { getMatIconNoHttpProviderError } from '@angular/material/icon';
+
+
+
+import { Observable } from 'rxjs';
+
+import { StripePaymentElementComponent } from 'ngx-stripe';
+import { PaymentIntent} from '@stripe/stripe-js';
+import {  StripeElementsOptions} from '@stripe/stripe-js';
 
 
 declare var Stripe: any;
@@ -55,29 +61,45 @@ export class PurchaseComponent implements OnInit {
   PlayerList!:PlayerWithCategoriesAndDiscountTypesBodyDto[];
 
  listSecret!:string;
- @ViewChild(StripeCardComponent) card!: StripeCardComponent;
+ @ViewChild(StripePaymentElementComponent)
+  paymentElement!: StripePaymentElementComponent;
 
-  cardOptions: StripeCardElementOptions = {
-    style: {
-      base: {
-        iconColor: '#666EE8',
-        color: '#31325F',
-        fontWeight: '300',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '18px',
-        '::placeholder': {
-          color: '#CFD7E0'
-        }
-      }
-    }
-  };
+//  @ViewChild(StripeCardComponent) card!: StripeCardComponent;
 
-  elementsOptions: StripeElementsOptions = {
-    locale: 'it'
-  };
+//   cardOptions: StripeCardElementOptions = {
+//     style: {
+//       base: {
+//         iconColor: '#666EE8',
+//         color: '#31325F',
+//         fontWeight: '300',
+//         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+//         fontSize: '18px',
+//         '::placeholder': {
+//           color: '#CFD7E0'
+//         }
+//       }
+//     }
+//   };
 
-  stripeTest!: FormGroup;
+//   elementsOptions: StripeElementsOptions = {
+//     locale: 'it'
+//   };
 
+//   stripeTest!: FormGroup;
+paymentElementForm = this.fb.group({
+  name: ['John doe', [Validators.required]],
+  email: ['support@ngx-stripe.dev', [Validators.required]],
+  address: [''],
+  zipcode: [''],
+  city: [''],
+  amount: [this.listAmount, [Validators.required, Validators.pattern(/d+/)]]
+});
+
+elementsOptions: StripeElementsOptions = {
+  locale: 'en'
+};
+
+paying = false;
 
   constructor(private stripeService: StripeService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -88,37 +110,102 @@ export class PurchaseComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    this.stripeTest = this.fb.group({
-      name: ['', [Validators.required]]
+    // this.stripeTest = this.fb.group({
+    //   name: ['', [Validators.required]]
       
+    // });
+
+    this.createPaymentIntent(this.DiscountId,this.quantity)
+    .subscribe(pi => {
+      this.elementsOptions.clientSecret = pi.clientSecret;
     });
   
+  this.plus();
     this.getCompanyId();
     this.getplayer();
+    // this.Proceed();
   }
 
-quantity:number=0;
+  pay() {
+    if (this.paymentElementForm.valid) {
+      this.paying = true;
+      this.stripeService.confirmPayment({
+        elements: this.paymentElement.elements,
+        confirmParams: {
+          payment_method_data: {
+            billing_details: {
+              name: this.paymentElementForm.get('name')?.value,
+              email: this.paymentElementForm.get('email')?.value,
+              address: {
+                line1: this.paymentElementForm.get('address')?.value || '',
+                postal_code: this.paymentElementForm.get('zipcode')?.value || '',
+                city: this.paymentElementForm.get('city')?.value || '',
+              }
+            }
+          }
+        },
+        redirect: 'if_required'
+      }).subscribe(result => {
+        this.paying = false;
+        console.log('Result', result);
+        if (result.error) {
+          // Show error to your customer (e.g., insufficient funds)
+          alert({ success: false, error: result.error.message });
+        } else {
+          // The payment has been processed!
+          if (result.paymentIntent?.status === 'succeeded') {
+            // Show a success message to your customer
+            alert({ success: true });
+          }
+        }
+      });
+    } else {
+      console.log(this.paymentElementForm);
+    }
+  }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  private createPaymentIntent(Id:number,quantity:number): Observable<PaymentIntentResponseDto> {
+    var Id = this.DiscountId;
+    var quantity=this.quantity;
+   
+    return this.http.post<PaymentIntentResponseDto>(
+      `${'https://localhost:7098/Stripe'}/CreatePaymentIntent`,
+      {Id,quantity }
+      
+    );
+  }
+
+
+
+
+
+quantity:number=1;
 i=0;
 plus(){
   if(this.i !=50)
   this.i++;
   this.quantity=this.i;
   // this.discountValue=this.discountValue*this.i;
-
-
-
-
-
 // var discountId= this.
 
 const discountId = this.DiscountId;
-
 console.log(discountId);
 var quantity=this.quantity;
 console.log(quantity);
-  
-
 this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTotalAmount?discountId='+discountId+ '&quantity='+quantity).pipe(
   map(result => result.totalAmount)
 ).subscribe(
@@ -137,14 +224,7 @@ minus(){
 if(this.i !=0)
 this.i--;
 this.quantity=this.i;
-
-
-
-
-
-
 const discountId = this.DiscountId;
-
 console.log(discountId);
 var quantity=this.quantity;
 console.log(quantity);
@@ -152,20 +232,10 @@ console.log(quantity);
 this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTotalAmount?discountId='+discountId+ '&quantity='+quantity).pipe(
   map(result => result.totalAmount)
 ).subscribe(
-  data => {
-    
+  data => {  
   this.listAmount = data
-
-
 }
-
-
 )
-
-
-
-
-// this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTotalAmount?discountId='+discountId,+'&quantity='+ s).pipe()
 }
 
 
@@ -197,23 +267,15 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
       map(result => result.companyId)
     ).subscribe(
       data => {
-        
       this.listdata = data
-
-    
-    
       // var lon= this.item.id;
-  
       var lin=this.listdata.id;
-  
     // console.log(lon,lin)
       this.http.get<GetAllDiscountsForPlayerResponseDto> ('https://localhost:7098/Discount/GetAllDiscountsForPlayerOfCompany?playerId=' + this.playerId + '&companyId='+lin).pipe(
         map(res => res.discounts)
       ).subscribe(res => {
        this.GetAllDiscountsForPlayerOfCompanyList = res
-   
        console.log(this.GetAllDiscountsForPlayerOfCompanyList)
-       
           console.log(this.name);
           console.log(this.discountValue)
         
@@ -240,94 +302,82 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
   }
 
 
-gotoCheckout(){
-  this.dialogRef.close();
-  this.dialog.open(StripeComponent, {
-    width: '560px',
-    height:'300px',
+// gotoCheckout(){
+//   this.dialogRef.close();
+//   this.dialog.open(StripeComponent, {
+//     width: '560px',
+//     height:'300px',
  
-    data: {
+//     data: {
       
-    },
+//     },
     
-  })
+//   })
 
 
-}
+// }
 
 
 Proceed(){
   const discountId = this.DiscountId;
-
- 
   var quantity=this.quantity;
-
-this.http.get<PaymentIntentResponseDto>('https://localhost:7098/Stripe/CreatePaymentIntent?discountId='+ discountId +'&&numberOfCodes=' + quantity).pipe(
+ this.http.get<PaymentIntentResponseDto>('https://localhost:7098/Stripe/CreatePaymentIntent?discountId='+ discountId +'&&numberOfCodes=' + quantity).pipe(
   map(result => result.clientSecret)
 ).subscribe(
   data => {
-    
   this.listSecret = data
-console.log(this.listSecret);
-
+  console.log(this.listSecret);
 }
-
-
 )
-
-
-
 }
 
 
-ngAfterViewInit() {
-  this.payment();
- 
-  }
+// ngAfterViewInit() {
+//   this.payment();
 
-   payment() {
+//   }
 
-   this.stripe = Stripe('pk_test_51L8ip2FfGn5fJOchgEPyBjBCF8Tvr0fCY8T2OWkT6syBvVUFAFumFe1DmsdwkyqJqjgagJo6M7l8RAlHxTZyU5UL00SD24xMCO');
-   var elements = this.stripe.elements();
-   var style = {
-   base: {
-   iconColor: '#666EE8',
-   color: '#31325F',
-   lineHeight: '50px',
-   fontWeight: 400,
-   fontFamily: 'Helvetica Neue',
-   fontSize: '18px',
-   '::placeholder': {
-     color: '#CFD7E0',
-     },
-    },
-  };
-  this.cardElement = elements.create('card', { style: style });
-  this.cardElement.mount('#card-element');
-  }
-  sendPayment() {
-    this.Proceed();
+//    payment() {
+
+//    this.stripe = Stripe('pk_test_51L8ip2FfGn5fJOchgEPyBjBCF8Tvr0fCY8T2OWkT6syBvVUFAFumFe1DmsdwkyqJqjgagJo6M7l8RAlHxTZyU5UL00SD24xMCO');
+//    var elements = this.stripe.elements();
+//    var style = {
+//    base: {
+//    iconColor: '#666EE8',
+//    color: '#31325F',
+//    lineHeight: '50px',
+//    fontWeight: 400,
+//    fontFamily: 'Helvetica Neue',
+//    fontSize: '18px',
+//    '::placeholder': {
+//      color: '#CFD7E0',
+//      },
+//     },
+//   };
+//   this.cardElement = elements.create('card', { style: style });
+//   this.cardElement.mount('#card-element');
+//   }
+//   sendPayment() {
+//     this.Proceed();
 
 
-  this.stripe
- .confirmCardPayment(
-  this.listSecret,
-   {
-     payment_method: { card: this.cardElement },
+//   this.stripe.confirmCardPayment(
+//   this.listSecret,{payment_method: { card: this.cardElement },}).then(function (result: { error: string; }) {
+//    if (result.error) {
+//      console.log(result.error, ' ==== error');
+//    } else {
      
-   }
- )
- .then(function (result: { error: string; }) {
-   if (result.error) {
-     console.log(result.error, ' ==== error');
-   } else {
-     console.log('success ==== ', result);
-   }
+//     console.log('success ==== ', result);
+     
+//    }
    
- });
+//  });
 
  
-  }
+//   }
+
+
+  
 
 
 createToken(): void {

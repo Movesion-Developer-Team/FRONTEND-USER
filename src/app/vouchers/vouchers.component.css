@@ -1,4 +1,4 @@
-.playertitle{
+/* .playertitle{
  border:2px solid ;
  width: 219px;
 height: 80px;   
@@ -9,7 +9,7 @@ border-radius: 25px;
 margin-left: 100px;
 margin-top: 55px;
 text-align: center ;
-}
+} */
 
 .flex{
     display: flex;
@@ -36,13 +36,13 @@ font-size: 28px;
     
 }
 
-
+/* 
 .text-center{
 font-family: Arial, Helvetica, sans-serif;
 font-size: 25px;
 font-weight: 600;
 margin-top: 20px;
-}
+} */
 
 .border2{
     border: 1px solid;
@@ -51,15 +51,28 @@ margin-top: 20px;
     margin-left:100px;
     margin-top: 50px;
     margin-bottom: 25px;
-    color: #E3BE60
+    color: #E3BE60;
+    font-family: 'Ubuntu', sans-serif !important;
     }
-
+    .image{
+        width: 219px;
+        height: 80px;
+        border-radius: 20px;
+        text-align: center;  
+        opacity: 1;
+      flex-direction: row;
+      text-align: center;
+      position:relative;
+      border: 3px solid #E3BE60;
+      margin-left: 100px;
+      }
 
  .title{
      
 text-align: left;
-font: normal normal bold 24px/31px Ubuntu;
+
 letter-spacing: 0.6px;
+font-family: 'Ubuntu', sans-serif !important;
 color: #FFFFFF;
 opacity: 1;
 text-align: left;
@@ -96,7 +109,7 @@ opacity: 1;
     height: 80px;
     opacity: 1;
      position:relative;
-
+     font-family: 'Ubuntu', sans-serif !important;
     
  }
 
@@ -151,8 +164,13 @@ opacity: 1;
 
  #material{
 
-    color: #FFFFFF;
+    color: #000000;
     
+ }
+
+ #material a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
  }
 
  #categories a{

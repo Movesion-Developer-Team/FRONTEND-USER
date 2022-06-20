@@ -3,7 +3,7 @@
 
 
         <div class="mainText">
-            <h1 class="text-left">scegli il benefit per te<br>
+            <h1 class="text-left">Scegli il benefit per te<br>
                 e la tua famiglia.</h1>
         </div>
 
@@ -36,10 +36,13 @@
     <hr class="border2">
 
         <div class="main">
-        <div class="example" *ngFor="let item of listinfo| filter:searchText">
-        <a class="text" [routerLink]="['/vouchers',item.id,item.shortName]" >
-        {{item.shortName}}
-        <img [src]="getImage">
+        <div *ngFor="let item of listinfo| filter:searchText">
+        <a  [routerLink]="['/vouchers',item.id,item.shortName]" >
+       
+        <!-- <img [src]="item.tempImage" style="width:100px; height:100px"> -->
+        <img [src]="'https://localhost:7098/Player/GetImageOfPlayer?PlayerId='+item.id" 
+            class="image" >
+            <!-- {{item.shortName}} -->
         </a>         
         </div>
         </div>
