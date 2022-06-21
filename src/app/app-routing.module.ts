@@ -17,6 +17,7 @@ import { StripeComponent } from './stripe/stripe.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MybenefitsComponent } from './mybenefits/mybenefits.component';
 import { ModalComponent } from './modal/modal.component';
+import { ResponseComponent } from './response/response.component';
 
 
 
@@ -37,6 +38,9 @@ const routes: Routes = [
   {path:'checkout', component: CheckoutComponent},
 {path:'modal',component: ModalComponent},
   {path:'mybenefits', component:MybenefitsComponent},
+
+
+  { path:'Response', component: ResponseComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 

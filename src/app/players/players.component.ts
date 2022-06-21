@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, NumberValueAccessor } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { catchError, concatMap, map, of, switchMap, tap, toArray } from 'rxjs';
+import { catchError, concatMap, distinctUntilChanged, map, of, Subject, switchMap, tap, toArray } from 'rxjs';
 import { BaseResponse } from '../models/BaseResponse';
 import { CreateNewCategoryBodyDto } from '../models/CreateNewCategoryBodyDto';
 import { GetAllCategoriesForCompanyResponseDto } from '../models/GetAllCategoriesForCompanyResponseDto';
@@ -34,7 +34,12 @@ export class PlayersComponent implements OnInit {
   searchText!: string;
   search!:FormGroup;
   searchList!: PlayerOnlyBodyDto[];
-  getImage!:any
+  getImage!:any;
+
+
+
+
+
   constructor( 
     private sanitizer : DomSanitizer ,
     private authService: AuthService,private http:HttpClient,private router:Router ,private route: ActivatedRoute) {

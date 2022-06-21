@@ -1,0 +1,31 @@
+
+ <div  *ngFor="let item of PlayerList">
+    <a  [routerLink]="['/vouchers',item.id,item.shortName]">
+        <img [src]="'https://localhost:7098/Player/GetImageOfPlayer?PlayerId='+item.id" 
+        class="image" >
+        
+    </a>
+</div>
+
+
+<div class="container1">
+    <h1 class="text-center"> Grazie! <br> La richiesta è stata inoltrata.
+
+
+
+    </h1>
+
+</div>
+
+<hr class="hr">
+
+<div class="container2">
+
+    
+    A breve riceverai una E-mail <br>
+    con il tuo Codice Voucher.
+
+</div>
+
+
+<button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>

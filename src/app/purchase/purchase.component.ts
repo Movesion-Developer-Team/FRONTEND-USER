@@ -3,7 +3,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NumberValueAccessor, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { interval, map } from 'rxjs';
 import { CheckoutComponent } from '../checkout/checkout.component';
 import { DiscountBodyDto, GetAllDiscountsForPlayerResponseDto } from '../models/GetAllDiscountsForPlayerResponseDto';
 import { BaseBody, GetCurrentUserInfoResponseDto } from '../models/GetCurrentUserInfoResponseDto';
@@ -12,19 +12,17 @@ import { PaymentIntentResponseDto } from '../models/PaymentIntent';
 import { FindPlayerByIdResponseDto, PlayerWithCategoriesAndDiscountTypesBodyDto } from '../models/PlayerMainResponseDto';
 import { StripeComponent } from '../stripe/stripe.component';
 import { AuthService } from '../_services/auth.service';
-
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
   StripeCardElementOptions} from '@stripe/stripe-js';
 import { getMatIconNoHttpProviderError } from '@angular/material/icon';
-
-
-
 import { Observable } from 'rxjs';
-
 import { StripePaymentElementComponent } from 'ngx-stripe';
 import { PaymentIntent} from '@stripe/stripe-js';
 import {  StripeElementsOptions} from '@stripe/stripe-js';
+import { ResponseComponent } from '../response/response.component';
+import { BaseResponse } from '../models/BaseResponse';
+
 
 
 declare var Stripe: any;
@@ -35,64 +33,33 @@ declare var Stripe: any;
 })
 export class PurchaseComponent implements OnInit {
  
-
-
-
-
-
   public parameterValue!: string;
   paymentMethods!:FormGroup;
-
   paymentForm!: FormGroup;
   GetAllDiscountsForPlayerOfCompanyList!:DiscountBodyDto[]
   private currentNumber = 0;
   listdata!:BaseBody
   name:string;
   playerId!: number  ;
-
   discountValue!: number;
  listAmount!:number;
   DiscountId!:number;
-
   stripe!:any;
-  cardElement!:any;
-
-
+  cardElement!:any
   PlayerList!:PlayerWithCategoriesAndDiscountTypesBodyDto[];
-
  listSecret!:string;
  @ViewChild(StripePaymentElementComponent)
   paymentElement!: StripePaymentElementComponent;
+salar!:any;
 
-//  @ViewChild(StripeCardComponent) card!: StripeCardComponent;
 
-//   cardOptions: StripeCardElementOptions = {
-//     style: {
-//       base: {
-//         iconColor: '#666EE8',
-//         color: '#31325F',
-//         fontWeight: '300',
-//         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-//         fontSize: '18px',
-//         '::placeholder': {
-//           color: '#CFD7E0'
-//         }
-//       }
-//     }
-//   };
-
-//   elementsOptions: StripeElementsOptions = {
-//     locale: 'it'
-//   };
-
-//   stripeTest!: FormGroup;
 paymentElementForm = this.fb.group({
   name: ['John doe', [Validators.required]],
   email: ['support@ngx-stripe.dev', [Validators.required]],
   address: [''],
   zipcode: [''],
   city: [''],
-  amount: [this.listAmount, [Validators.required, Validators.pattern(/d+/)]]
+  // amount: [25, [Validators.required]]
 });
 
 elementsOptions: StripeElementsOptions = {
@@ -110,23 +77,15 @@ paying = false;
   }
  
   ngOnInit(): void {
-    // this.stripeTest = this.fb.group({
-    //   name: ['', [Validators.required]]
-      
-    // });
-
-    this.createPaymentIntent(this.DiscountId,this.quantity)
-    .subscribe(pi => {
-      this.elementsOptions.clientSecret = pi.clientSecret;
-    });
   
+
   this.plus();
-    this.getCompanyId();
-    this.getplayer();
-    // this.Proceed();
+  this.getCompanyId();
+  this.getplayer();
+  
   }
 
-  pay() {
+  pay(item: DiscountBodyDto) {
     if (this.paymentElementForm.valid) {
       this.paying = true;
       this.stripeService.confirmPayment({
@@ -148,14 +107,22 @@ paying = false;
       }).subscribe(result => {
         this.paying = false;
         console.log('Result', result);
+      
+      // this.salar.push(result);
         if (result.error) {
-          // Show error to your customer (e.g., insufficient funds)
-          alert({ success: false, error: result.error.message });
+          alert('an error occurred while processing the request');
         } else {
-          // The payment has been processed!
           if (result.paymentIntent?.status === 'succeeded') {
-            // Show a success message to your customer
-            alert({ success: true });
+            // alert('  The payment has been processed!');
+            this.dialogRef.close();
+            this.dialog.open(ResponseComponent, {
+              width: '400px',
+              height:'310px',
+          
+              data: {
+                playerId:item.playerId,
+              },
+            })
           }
         }
       });
@@ -165,32 +132,39 @@ paying = false;
   }
 
 
+PaymentIntent(){
+  var discountId = this.DiscountId;
+  console.log(discountId);
+  this.createPaymentIntent(discountId,this.quantity)
+  .subscribe(pi => {
+    this.elementsOptions.clientSecret = pi.clientSecret;
+  });
+}
 
 
+ completeOrder(result:any,discountId:number,quantity:number): Observable<BaseResponse>{
+  console.log(result);
 
-
-
-
-
-
-
-
-
-
-
-  private createPaymentIntent(Id:number,quantity:number): Observable<PaymentIntentResponseDto> {
-    var Id = this.DiscountId;
+  var discountId = this.DiscountId;
     var quantity=this.quantity;
-   
-    return this.http.post<PaymentIntentResponseDto>(
-      `${'https://localhost:7098/Stripe'}/CreatePaymentIntent`,
-      {Id,quantity }
-      
+  var result= this.salar;
+    return this.http.post<BaseResponse>(
+      `https://localhost:7098/Purchase/CompleteOrder?status=${result}&discountId=${discountId}&numberOfCodes=${quantity}`,{}
     );
   }
 
 
 
+  private createPaymentIntent(Id:number,quantity:number): Observable<PaymentIntentResponseDto> {
+    var discountId = this.DiscountId;
+    var quantity=this.quantity;
+   
+    return this.http.post<PaymentIntentResponseDto>(
+      `https://localhost:7098/Stripe/CreatePaymentIntent?discountId=${discountId}&numberOfCodes=${quantity}`,{}
+    
+      
+    );
+  }
 
 
 quantity:number=1;
@@ -212,7 +186,7 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
   data => {
     
   this.listAmount = data
-
+console.log(data);
 
 }
 
@@ -240,22 +214,9 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
 
 
 
-
-
-
-
-
-
-
-
-
-
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
-
 
 
 
@@ -289,8 +250,6 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
    }
 
 
-
-
    getplayer(){
     var lon= this.data.playerId;
     this.http.get<FindPlayerByIdResponseDto>('https://localhost:7098/Player/FindById?id='+lon).pipe(
@@ -301,21 +260,6 @@ this.http.get<GetTotalAmountResponseDto>('https://localhost:7098/Purchase/GetTot
     })
   }
 
-
-// gotoCheckout(){
-//   this.dialogRef.close();
-//   this.dialog.open(StripeComponent, {
-//     width: '560px',
-//     height:'300px',
- 
-//     data: {
-      
-//     },
-    
-//   })
-
-
-// }
 
 
 Proceed(){
@@ -332,85 +276,7 @@ Proceed(){
 }
 
 
-// ngAfterViewInit() {
-//   this.payment();
-
-//   }
-
-//    payment() {
-
-//    this.stripe = Stripe('pk_test_51L8ip2FfGn5fJOchgEPyBjBCF8Tvr0fCY8T2OWkT6syBvVUFAFumFe1DmsdwkyqJqjgagJo6M7l8RAlHxTZyU5UL00SD24xMCO');
-//    var elements = this.stripe.elements();
-//    var style = {
-//    base: {
-//    iconColor: '#666EE8',
-//    color: '#31325F',
-//    lineHeight: '50px',
-//    fontWeight: 400,
-//    fontFamily: 'Helvetica Neue',
-//    fontSize: '18px',
-//    '::placeholder': {
-//      color: '#CFD7E0',
-//      },
-//     },
-//   };
-//   this.cardElement = elements.create('card', { style: style });
-//   this.cardElement.mount('#card-element');
-//   }
-//   sendPayment() {
-//     this.Proceed();
+onSubmit(): void {}
 
 
-//   this.stripe.confirmCardPayment(
-//   this.listSecret,{payment_method: { card: this.cardElement },}).then(function (result: { error: string; }) {
-//    if (result.error) {
-//      console.log(result.error, ' ==== error');
-//    } else {
-     
-//     console.log('success ==== ', result);
-     
-//    }
-   
-//  });
-
- 
-//   }
-
-
-  
-
-
-createToken(): void {
-  // this.Proceed();
-//   const name = this.stripeTest.get('name')?.value;
-
-//   this.stripeService
-//     .createToken(this.card.element,{name})
-//     .subscribe((result) => {
-//       if (result.token) {
-//         // Use the token
-//         console.log(result.token.id);
-//       } else if (result.error) {
-//         // Error creating the token
-//      alert(result.error.message);
-//       }
-//     });
-// }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   onSubmit(): void {}
 }
