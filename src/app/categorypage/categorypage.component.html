@@ -35,7 +35,7 @@
             <div class="container1">
              
                     <div class="form-group">
-                    <input   type="text"  #searchText (keyup)="submit(searchText.value)" formControlName="playerName" class="form-control"  [(ngModel)]="searchText" placeholder="Cerca Il tuo Benefit" />
+                    <input   type="text"   formControlName="playerName" class="form-control"  [(ngModel)]="searchText" placeholder="Cerca Il tuo Benefit" />
                     <button type="submit" class="search-btn"> <span class="material-icons">search</span> </button>
                      </div>
            
