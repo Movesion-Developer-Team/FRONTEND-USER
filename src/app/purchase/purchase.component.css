@@ -232,7 +232,6 @@ margin-top: 12px;
 width:281px;
  height: 81px;
  background: #E3BE60 0% 0% no-repeat padding-box;
-
  border-radius: 20px;
 opacity: 1;
  margin-left: 125px;
@@ -253,30 +252,17 @@ opacity: 1;
     }
 
     .container5{
-
-        margin:0;
-	
+margin:0;
         margin-left: 5px;
         background-color: #f0fbff;
         /* background-image: url(/src/assets/images/Stripe-Logo.png) ; */
-    
         background-repeat: no-repeat; 
-       
-      
-    
-        
-    
         height:100%;
         width:100%; 
          width: 500px;
-height: 220px;
-
+height: 270px;
 border: #ededed solid;
-
 margin-top: 10px;
-
-
-/* background: #FFFFFF 0% 0% no-repeat padding-box; */
 border-radius: 10px;
 opacity: 1; 
     }
@@ -306,9 +292,22 @@ opacity: 1;
 
 
 
-
-
-
+.btn-warning{
+    margin-top: 5px;
+    width: 165px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #E3BE60 ;
+    color: #FFFFFF;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 16px bold;
+    margin-left: 175px;
+font: normal normal bold 16px/18px Ubuntu;
+letter-spacing: 0px;
+opacity: 1;
+}
 
 
 body{

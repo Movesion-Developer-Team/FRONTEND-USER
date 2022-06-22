@@ -48,10 +48,10 @@
         <!-- <a href=# class="nav-link" routerLink="login"><span class="material-icons">person</span> </a> -->
         <button mat-button [matMenuTriggerFor]="menu" class="mat-button"><span class="material-icons">person</span></button>
 
-<mat-menu #menu="matMenu" >
+<mat-menu #menu="matMenu" class="matMenu">
 
   <button mat-menu-item (click)="openModal()" >I miei benefit</button>
-  <button mat-menu-item>myAccount </button>
+  <button mat-menu-item><span class="material-icons">manage_accounts</span> myAccount </button>
   <button mat-menu-item >Logout</button>
 
 </mat-menu>

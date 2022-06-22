@@ -9,7 +9,7 @@
     text-align: center;
     height: 60px;
    display:inline-flex;
-
+   display: block;
    overflow: hidden;
  
  
@@ -30,17 +30,18 @@ margin-top: 20px;
 
   .s {
  
- margin-right: 100px;
+margin-left: 33%;
     float: right;
     width: 232px;
     height: 12px;
+    display: block;
    
 }
   
 
 .column3{
 float: right;
-margin-right: 100px;
-margin-left: 350px;
+margin-right: 99px;
+margin-left: 385px;
 font-family: 'Ubuntu', sans-serif !important;
 }

@@ -246,7 +246,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias vol
 
 <div class="flex1">
     <button mat-button class="btn" class="button1" (click)="onNoClick()">Chiudi</button>
-    <button mat-raised-button class="btn "  class="button" matStepperNext="matStepperNext">Procedi</button>
+    <button mat-raised-button class="btn "  class="button" matStepperNext="matStepperNext" (click)="PaymentIntent()">Procedi</button>
 </div>
         </mat-step>
         
@@ -284,28 +284,47 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias vol
                         </div>
                             
                      
-                      <div class="container5"> 
-                           
-                        <!-- <label>
-<h1 class="text-center">Card Details</h1>
-
-  <div id="card-element" class="field"></div>
-</label>
-<button type="submit" class="btn btn-warning " (click)="sendPayment()">Submit Payment</button> -->
-  
+                      <div class="container5">    
+                        <div [formGroup]="paymentElementForm">
+                            <!-- <mat-form-field class="example-full-width" appearance="fill">
+                              <input matInput placeholder="name" formControlName="name" />
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <input matInput placeholder="Email" type="email" formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <input matInput placeholder="Address" formControlName="address" />
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <input matInput placeholder="ZIP Code" formControlName="zipcode" />
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <input matInput placeholder="city" formControlName="city" />
+                            </mat-form-field> -->
+                            <ng-container *ngIf="elementsOptions?.clientSecret as clientSecret">
+                              <ngx-stripe-payment [clientSecret]="clientSecret">
+                                
+                              </ngx-stripe-payment>
+                            </ng-container>
+                            <div *ngFor="let item of GetAllDiscountsForPlayerOfCompanyList">
+                
+                                <button class="btn-warning" (click)="pay(item)">PAY</button>
+                            </div>
+                          </div>
                        
                             
-
+                          <!-- <button mat-button class="btn" class="button10" (click)="completeOrder(salar,DiscountId,quantity)">Chiudi</button> -->
                          
                       </div>
                   
         
-                     
+                      
 
                        
                        
                         <div class="flex3">
                             <button mat-button class="btn" class="button10" (click)="onNoClick()">Chiudi</button>
+                           
                             <!-- <button mat-raised-button class="btn "  type="submit" class="button" matStepperNext="matStepperNext" (click)="onNoClick()">Procedi</button> -->
                         </div>
         </form>
@@ -315,38 +334,15 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate molestias vol
 
 
 
-
+       
 
 
 
 
         
-        <div [formGroup]="paymentElementForm">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="name" formControlName="name" />
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="Email" type="email" formControlName="email" />
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="Address" formControlName="address" />
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="ZIP Code" formControlName="zipcode" />
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="city" formControlName="city" />
-            </mat-form-field>
-            <ng-container >
-              <ngx-stripe-payment >
-
-
-              </ngx-stripe-payment>
-            </ng-container>
-            <button (click)="pay()">PAY</button>
-          </div>
      
-         
+<!--      
+        <button mat-button class="btn" class="button10" (click)="completeOrder(salar,DiscountId,quantity)">ssss</button> -->
 
 
         </mat-step>

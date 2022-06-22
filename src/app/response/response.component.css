@@ -1,0 +1,59 @@
+.image{
+  margin-left: 40px;
+     width:250px;
+    height: 80px;
+    border-radius: 20px;
+    text-align: center;  
+    opacity: 1;
+  flex-direction: row;
+  text-align: center;
+  position:relative;
+  border: 3px solid #E3BE60; 
+
+  }
+
+  .container1{
+margin-left: 5px;
+width: 308px;
+height: 48px;
+  }
+  .hr{
+    color:black
+  }
+  .text-center{
+    text-align: center;
+font: normal normal bold 21px/24px Ubuntu;
+letter-spacing: 0.53px;
+color: #30373A;
+opacity: 1;
+  }
+  .container2{
+    margin-left: 50px;
+    width: 234px;
+height: 41px;
+    text-align: center;
+    font: normal normal medium 17px/22px Ubuntu;
+    letter-spacing: 0.42px;
+    color: #999999;
+    opacity: 1;
+  }
+  .button1{
+
+margin-top: 20px;
+    width: 165px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #CCCCCC;
+    color: #FFFFFF;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 16px bold;
+    margin-left: 98px;
+font: normal normal bold 16px/18px Ubuntu;
+letter-spacing: 0px;
+opacity: 1;
+
+
+  }
+
