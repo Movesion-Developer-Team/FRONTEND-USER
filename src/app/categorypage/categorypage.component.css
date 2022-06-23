@@ -317,5 +317,15 @@ a{
 
 
 
-
+.image{
+  width: 219px;
+  height: 80px;
+  border-radius: 20px;
+  text-align: center;  
+  opacity: 1;
+flex-direction: row;
+text-align: center;
+position:relative;
+border: 3px solid #E3BE60;
+}
 

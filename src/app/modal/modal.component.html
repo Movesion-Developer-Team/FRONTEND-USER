@@ -26,48 +26,46 @@
     <div class="text-center">
         <h1> I MIEI BENEFITI</h1>
     </div>
-    <div class="flex">
-    <div class="container">
 
-    </div>
-    <div class="container">
 
-    </div>
-</div>
+
 <div class="container1">
 
 
-    <table class="table ">
-        <thead >
-          <tr>
-            <th c scope="col">DATA ACQUISTO</th>
+    <table class="table " >
+        <thead class="thead-dark ">
+          <tr><meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <th c scope="col"  class="ass">DATA ACQUISTO</th>
             <th scope="col">MERCHANT</th>
             <th scope="col">PREZZO</th>
             <th scope="col">METODO</th>
             <th scope="col">PUNTI</th>
-            <th scope="col">CODICE</th>
+            <th scope="col"> Codice </th>
+            <th scope="col"> AZIONI</th>
             
           </tr>
         </thead>
        
-        <tbody>
-          <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tbody class="table-striped">
+          <tr *ngFor="let item of listCodes">
+           
+            <td> {{item.orderDateTime}}</td>
+            <td>{{item.playerName}}</td>
+            <td>{{item.finalPrice}}</td>
+            <td>{{item.discountTypeName}}</td>      
+            <td>{{item.priceInPoints}}</td>
+            <td #formInputText>{{item.code}}</td>
+            <td class="custom">
+       
+              <a href="">
+              <span class="material-icons" >content_copy</span> </a>
+              <a href=""><span class="material-icons">info</span></a>
+              <a href=""><span class="material-icons">list</span>
+            </a>
+            </td>
+
           </tr>
-          <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td colspan="2"></td>
-            <td></td>
-          </tr>
+         
         </tbody>
       </table>
       
@@ -78,7 +76,6 @@
 
 
 
+
 </div>
-
-
  

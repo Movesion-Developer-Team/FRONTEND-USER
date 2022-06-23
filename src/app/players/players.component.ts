@@ -150,28 +150,24 @@ export class PlayersComponent implements OnInit {
 
 
 
-  submit(){
+ searchPlayer(){
 
-
-
-
-    // var name=this.search.get('playerName')?.value;
-    // console.log(name)
-    
-    //  this.http.get<GetAllPlayersForCurrentCompanyResponseDto>('https://localhost:7098/Company/SearchForPlayerOfCompany?playerName='+name).pipe(
-    //   map(result=>result.players)
-    //  ).subscribe({
-    //   next:data=>{
-    //   this.searchList=data;
+    var name=this.search.get('playerName')?.value;
+    console.log(name)
+     this.http.get<GetAllPlayersForCurrentCompanyResponseDto>('https://localhost:7098/Company/SearchForPlayerOfCompany?playerName='+name).pipe(
+      map(result=>result.players)
+     ).subscribe({
+      next:data=>{
+      this.searchList=data;
      
-    //   console.log(data)
-    //   }
-    //  })
+      console.log(data)
+      }
+     })
     
     
     
      
-    // }
+    }
 
 
 
@@ -179,4 +175,3 @@ export class PlayersComponent implements OnInit {
 }
 
 
-}

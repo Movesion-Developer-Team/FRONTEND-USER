@@ -1,38 +1,68 @@
+import { style } from '@angular/animations';
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import { map } from 'rxjs';
+import { GetAllOrdersOfCurrentUserResponseDto,UserDiscountCodeBodyDto} from '../models/GetAllOrdersOfCurrentUserResponseDto';
+import {Clipboard} from '@angular/cdk/clipboard';
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+
+
+
+
+
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 
-export class ModalComponent  {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
 
-  constructor(public modalRef: MdbModalRef<ModalComponent>) { }
+export class ModalComponent  {
+
+  listCodes!:UserDiscountCodeBodyDto[]
+
+
+
+
+
+
+
+  constructor( private http :HttpClient , public modalRef: MdbModalRef<ModalComponent>, private clipboard: Clipboard) { 
+
+} 
+
+
+
 
   ngOnInit(): void {
+    this.GetAllOrdersOfCurrentUserResponseDto();
   
+  }
+  copyHeroName() {
+    this.clipboard.copy('Alphonso');
+  }
+  applyFilter() {
+    this.listCodes.filter 
+    console.log(this.listCodes.filter);}
+
+  GetAllOrdersOfCurrentUserResponseDto(){
+    this.http.get<GetAllOrdersOfCurrentUserResponseDto>('https://localhost:7098/Purchase/GetAllOrdersOfCurrentUser').pipe(
+      map(result=>result.codes)
+    )
+    .subscribe({
+      next: data => {
+      this.listCodes = data;
+
+   },
+
+  })
+
+
   }
 
 }

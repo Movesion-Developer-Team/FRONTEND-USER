@@ -11,7 +11,7 @@
         <div class="vl"></div>
 
         <div class="container1">
-            <form [formGroup]="search" (ngSubmit)="submit()" >
+            <form [formGroup]="search" (ngSubmit)="searchPlayer()" >
                 <div class="form-group">
                 <input type="text" formControlName="playerName" class="form-control" [(ngModel)]="searchText" placeholder="Cerca Il tuo Benefit" />
                 <button type="submit" class="search-btn"> <span class="material-icons">search</span> </button>

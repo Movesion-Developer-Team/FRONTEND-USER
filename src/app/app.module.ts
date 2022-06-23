@@ -62,6 +62,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { ModalComponent } from './modal/modal.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ResponseComponent } from './response/response.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 
@@ -146,7 +147,7 @@ import { ResponseComponent } from './response/response.component';
 
     NoopAnimationsModule,
     Ng2SearchPipeModule,
-
+    ClipboardModule,
   ],
 
 
