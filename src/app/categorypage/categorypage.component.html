@@ -33,16 +33,14 @@
             <div class="vl"></div>
 
             <div class="container1">
-             
+                <form [formGroup]="search"  >
                     <div class="form-group">
-                    <input   type="text"   formControlName="playerName" class="form-control"  [(ngModel)]="searchText" placeholder="Cerca Il tuo Benefit" />
+                    <input type="search"  formControlName="playerName" class="form-control" 
+                    placeholder="Cerca Il tuo Benefit" />
                     <button type="submit" class="search-btn"> <span class="material-icons">search</span> </button>
                      </div>
-           
-              
+                </form>   
             </div>
-
-
             <!-- <div class="sign">
                 <a href="/home"> <i style="font-size:20px" class="fa" id="fa1">&#xf137; </i></a>
               </div> -->
@@ -52,12 +50,21 @@
 
 
 
+    <div class="main"  >
+        <div class="example" *ngFor="let item of listsOfItems  ">
+            <a class="text"[routerLink]="item.url" >        
+                {{item.name}}
+                <!-- <img [src]="'https://localhost:7098/Player/GetImageOfPlayer?PlayerId='+item.id" 
+                class="image" > -->
+            </a>
+        </div>
+    </div>  
 
-    <div class="main"  *ngIf="playerShow">
-        <div class="example" *ngFor="let item of listinfo ">
+<!-- 
+    <div class="main"  >
+        <div class="example" *ngFor="let item of listinfo  ">
             <a class="text"[routerLink]="['/players',item.id,item.name]" >        
                 {{item.name}}
-                
             </a>
         </div>
     </div>  
@@ -65,12 +72,13 @@
 
 
 <div class="main"  >
-    <div class="example" *ngFor="let item of searchList  ">
+    <div class="example" *ngFor="let item of searchList | filter:searchText ">
     <a class="text"[routerLink]="['/vouchers',item.id,item.shortName]" >        
     {{item.shortName}}
+
      </a>
     </div>
-    </div>  
+    </div>   -->
 
 
 

@@ -15,7 +15,7 @@ import { GetAllCategoriesForCompanyResponseDto } from '../models/GetAllCategorie
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { companyId } from '../models/companyId';
 import { GetAllPlayersForCurrentCompanyResponseDto, PlayerOnlyBodyDto } from '../models/GetAllPlayersForCurrentCompanyResponseDto';
-import {debounceTime} from 'rxjs/operators';
+import {debounceTime, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -38,8 +38,10 @@ listcategory!:CreateNewCategoryBodyDto[];
 
 search!:FormGroup
 searchList!: PlayerOnlyBodyDto[];
-playerShow= true;
+playerShow= false;
 
+
+listsOfItems :{name: string, url: string ,id:number }[] = [];
 
 @Input() initialValue: string = '';
   @Input() debounceTime = 300;
@@ -66,6 +68,30 @@ playerShow= true;
   this.search = this.fb.group({
     playerName:['',Validators.required],
   })
+
+  this.search.valueChanges.pipe(
+    startWith({playerName:''}),
+    debounceTime(500),
+    distinctUntilChanged(),
+    switchMap(term => {
+      if (!term || !term.playerName || term.playerName.length <= 0) {
+        return of(this.listinfo.map(x => ({ name: x.name, url: `/players/${x.id}/${x.name}`,id: x.id })));
+      }
+      if (this.listinfo){
+        const filtered = this.listinfo.filter(x => x.name.toLowerCase().includes(term.playerName.toLowerCase()));
+        if (filtered.length > 0) {
+          return of(filtered.map(x => ({ name: x.name, url: `/players/${x.id}/${x.name}`,id: x.id})));
+        }
+      }
+      return this.http.get<GetAllPlayersForCurrentCompanyResponseDto>(`https://localhost:7098/Company/SearchForPlayerOfCompany?playerName=${term.playerName}`)
+      .pipe(
+        map(result => result.players.map(x => ({ name: x.shortName, url: `/vouchers/${x.id}/${x.shortName}`,id: x.id })))
+      )
+    })
+  ).subscribe((result)=>{
+    console.log(result);
+this.listsOfItems= result; 
+  });
 
 }
 
@@ -106,6 +132,7 @@ this.http.get<GetAllCategoriesForCompanyResponseDto>('https://localhost:7098/Cat
 ).subscribe({
   next: data => {
   this.listinfo = data; 
+  // this.playerShow = true;
 
 },
 
@@ -122,24 +149,28 @@ this.http.get<GetAllCategoriesForCompanyResponseDto>('https://localhost:7098/Cat
 
 
   }
+  
 
 
+// searchPlayer() {
 
-submit(searchText:string){
-var name=this.search.get('playerName')?.value;
-console.log(name)
- this.http.get<GetAllPlayersForCurrentCompanyResponseDto>('https://localhost:7098/Company/SearchForPlayerOfCompany?playerName='+name).pipe(
-  map(result=>result.players)
- ).subscribe({
-  next:data=>{
-  this.searchList=data;
-  // this.playerShow=false;
-  console.log(data)
-  }
- })
+// var name=this.search.get('playerName')?.value;
+// console.log(name)
+//  this.http.get<GetAllPlayersForCurrentCompanyResponseDto>('https://localhost:7098/Company/SearchForPlayerOfCompany?playerName='+name).pipe(
+//   map(result=>result.players)
+//  ).subscribe({
+//   next:data=>{
+//   this.searchList=data;
+//   this.playerShow=true;
+//   this.listinfo===this.listinfo!;
+//   console.log(data)
 
-  console.log('salam')
-}
+
+//   }
+//  })
+
+ 
+// }
 
 
 
